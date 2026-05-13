@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<meta name="viewport" content="width=900">
+<title>Inbox · Operator Intelligence</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=DM+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg: #1A1A1F;
+    --surface: rgba(255,255,255,0.04);
+    --border: rgba(255,255,255,0.10);
+    --text: rgba(254,254,254,0.92);
+    --text-2: rgba(254,254,254,0.62);
+    --text-3: rgba(254,254,254,0.40);
+    --accent: #DC5A1C;
+    --accent-soft: rgba(220,90,28,0.14);
+    --accent-border: rgba(220,90,28,0.35);
+    --warn: #F59E0B;
+    --warn-soft: rgba(245,158,11,0.16);
+    --success: #1C8A5A;
+    --success-soft: rgba(28,138,90,0.16);
+  }
+  html, body {
+    margin: 0; padding: 0;
+    width: 403px;
+    height: 227px;
+    overflow: hidden;
+    background: var(--bg);
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    color: var(--text);
+    -webkit-font-smoothing: antialiased;
+  }
+  .stage {
+    width: 900px;
+    height: 506px;
+    transform: scale(0.4478);
+    transform-origin: top left;
+    position: absolute;
+    top: 0; left: 0;
+    padding: 30px 36px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    background: var(--bg);
+  }
+
+  /* TICKET CARD */
+  .ticket {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 22px 26px;
+  }
+  .ticket__meta {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 14px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 13px;
+    color: var(--text-3);
+  }
+  .ticket__id { color: var(--text-2); }
+  .pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-weight: 600;
+    font-size: 11px;
+    letter-spacing: 0.05em;
+  }
+  .pill--p1 {
+    background: rgba(185,55,55,0.18);
+    color: #F08989;
+    border: 1px solid rgba(185,55,55,0.35);
+  }
+  .pill--sla {
+    background: var(--warn-soft);
+    color: var(--warn);
+    border: 1px solid rgba(245,158,11,0.32);
+  }
+  .pill--sla::before {
+    content: "⏱";
+    font-size: 12px;
+  }
+  .ticket__title {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 1.2;
+    letter-spacing: -0.015em;
+    color: var(--text);
+    margin-bottom: 12px;
+  }
+  .ticket__msg {
+    font-size: 15px;
+    line-height: 1.5;
+    color: var(--text-2);
+    max-width: 720px;
+  }
+
+  /* AI ENRICHMENT BUBBLE */
+  .ai {
+    position: relative;
+    background: linear-gradient(160deg, rgba(220,90,28,0.10), rgba(220,90,28,0.03));
+    border: 1px solid var(--accent-border);
+    border-radius: 14px;
+    padding: 20px 24px 22px;
+  }
+  .ai__header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 12px;
+  }
+  .ai__badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 4px 10px 4px 8px;
+    border-radius: 999px;
+    background: var(--accent-soft);
+    border: 1px solid var(--accent-border);
+    color: #FFB48A;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+  .ai__dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 0 3px rgba(220,90,28,0.18);
+  }
+  .ai__text {
+    font-size: 15px;
+    line-height: 1.55;
+    color: var(--text);
+  }
+  .ai__text b {
+    color: #FEFEFE;
+    font-weight: 600;
+  }
+  .ai__text em {
+    font-style: normal;
+    color: rgba(255,180,140,0.95);
+    font-weight: 500;
+  }
+  .ai__action {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-top: 16px;
+    padding-top: 14px;
+    border-top: 1px solid rgba(220,90,28,0.18);
+  }
+  .ai__suggest {
+    flex: 1;
+    font-size: 13px;
+    color: var(--text-2);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .ai__suggest::before {
+    content: "→";
+    color: var(--accent);
+    font-weight: 600;
+  }
+  .ai__suggest b { color: var(--text); font-weight: 600; }
+  .ai__btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 9px 18px;
+    background: var(--accent);
+    color: #FEFEFE;
+    border: none;
+    border-radius: 8px;
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    box-shadow: 0 4px 14px rgba(220,90,28,0.30);
+  }
+  .ai__btn::after {
+    content: "▸";
+    font-size: 9px;
+  }
+</style>
+</head>
+<body>
+  <div class="stage">
+
+    <!-- TICKET CARD -->
+    <div class="ticket">
+      <div class="ticket__meta">
+        <span class="ticket__id"># TKT-004009</span>
+        <span class="pill pill--p1">P1</span>
+        <span class="pill pill--sla">SLA · 33 MIN LEFT</span>
+      </div>
+      <div class="ticket__title">SSO sign-on failing for GitLab</div>
+      <div class="ticket__msg">My account seems to be locked on GitLab. I haven't changed anything recently — can someone help me reset it?</div>
+    </div>
+
+    <!-- AI ENRICHMENT BUBBLE -->
+    <div class="ai">
+      <div class="ai__header">
+        <span class="ai__badge"><span class="ai__dot"></span>AI Reasoning</span>
+      </div>
+      <p class="ai__text">
+        Ticket owner is <b>John Doe</b> — contractor, joined a year ago.
+        Axiom shows he's still on <b>Google Workspace</b> and has <em>no Okta account</em>.
+        The company has switched to <b>Okta for SSO</b>.
+      </p>
+      <div class="ai__action">
+        <span class="ai__suggest">Suggested workflow: <b>Onboard John Doe to Okta</b></span>
+        <span class="ai__btn">Run</span>
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>

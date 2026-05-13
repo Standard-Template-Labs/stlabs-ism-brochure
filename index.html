@@ -302,6 +302,21 @@
 
     .spotlight__visual--graphic::before { display: none; }
     .spotlight__visual--graphic iframe { display: block; }
+    .spotlight__visual--mock {
+      background: transparent;
+      border: none;
+      box-shadow: none;
+      border-radius: 0;
+      overflow: hidden;
+    }
+    .spotlight__visual--mock::before { display: none; }
+    .mock-frame {
+      width: 100%;
+      height: 100%;
+      border: 0;
+      display: block;
+      pointer-events: none;
+    }
 
     /* Page 2: compact surface spotlights (3 per page) */
     .page--two .product-title {
@@ -602,7 +617,7 @@
         <p>Axiom continuously streams identity, telemetry, tickets, and business context from your existing stack into your STLabs instance — joined, enriched, and in real time.</p>
       </div>
       <div class="spotlight__visual spotlight__visual--graphic" aria-hidden="true">
-        <iframe class="axiom-frame" src="axiom-live-graph.html?v=1778695279" scrolling="no" aria-hidden="true"></iframe>
+        <iframe class="axiom-frame" src="axiom-live-graph.html?v=1778699493" scrolling="no" aria-hidden="true"></iframe>
       </div>
     </div>
 
@@ -708,8 +723,8 @@
         <h2>Every incoming issue, pre&#8209;enriched</h2>
         <p class="lead">Inbox clusters incoming work by root cause and attaches the live slice of Axiom that matters. Operators see what's repeating, what's affected, and the one workflow that fixes it once.</p>
       </div>
-      <div class="spotlight__visual" data-src="inbox-ticket.png">
-        <img src="inbox-ticket.png" alt="Inbox — VPN authentication failure ticket with intake context, diagnostics, and AI reasoning" onerror="this.classList.add('missing')">
+      <div class="spotlight__visual spotlight__visual--mock">
+        <iframe class="mock-frame" src="inbox-mock.html?v=1778699493" scrolling="no" aria-hidden="true"></iframe>
       </div>
     </div>
 
