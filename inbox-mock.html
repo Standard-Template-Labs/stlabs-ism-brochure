@@ -5,8 +5,7 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<meta name="viewport" content="width=900">
-<title>Inbox · Operator Intelligence</title>
+<title>Inbox · Activity</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=DM+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
@@ -15,20 +14,15 @@
   :root {
     --bg: #1A1A1F;
     --surface: rgba(255,255,255,0.04);
+    --surface-2: rgba(255,255,255,0.06);
     --border: rgba(255,255,255,0.10);
     --text: rgba(254,254,254,0.92);
     --text-2: rgba(254,254,254,0.62);
     --text-3: rgba(254,254,254,0.40);
     --accent: #DC5A1C;
     --accent-soft: rgba(220,90,28,0.14);
-    --accent-border: rgba(220,90,28,0.35);
-    --warn: #F59E0B;
-    --warn-soft: rgba(245,158,11,0.16);
-    --success: #1C8A5A;
-    --success-soft: rgba(28,138,90,0.16);
   }
   html, body {
-    margin: 0; padding: 0;
     width: 403px;
     height: 227px;
     overflow: hidden;
@@ -44,190 +38,193 @@
     transform-origin: top left;
     position: absolute;
     top: 0; left: 0;
-    padding: 30px 36px;
-    display: flex;
-    flex-direction: column;
-    gap: 18px;
+    padding: 28px 32px;
     background: var(--bg);
   }
 
-  /* TICKET CARD */
-  .ticket {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 14px;
-    padding: 22px 26px;
-  }
-  .ticket__meta {
+  /* Tab nav */
+  .nav {
     display: flex;
     align-items: center;
-    gap: 10px;
-    margin-bottom: 14px;
+    gap: 22px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 6px;
+  }
+  .nav__title {
     font-family: 'IBM Plex Mono', monospace;
     font-size: 13px;
-    color: var(--text-3);
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    color: var(--text);
   }
-  .ticket__id { color: var(--text-2); }
-  .pill {
+  .nav__ico {
     display: inline-flex;
     align-items: center;
-    gap: 6px;
-    padding: 4px 10px;
-    border-radius: 6px;
-    font-family: 'IBM Plex Mono', monospace;
-    font-weight: 600;
-    font-size: 11px;
-    letter-spacing: 0.05em;
+    gap: 4px;
+    color: var(--text-3);
+    font-size: 13px;
   }
-  .pill--p1 {
-    background: rgba(185,55,55,0.18);
-    color: #F08989;
-    border: 1px solid rgba(185,55,55,0.35);
+  .nav__tab {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-3);
   }
-  .pill--sla {
-    background: var(--warn-soft);
-    color: var(--warn);
-    border: 1px solid rgba(245,158,11,0.32);
-  }
-  .pill--sla::before {
-    content: "⏱";
-    font-size: 12px;
-  }
-  .ticket__title {
-    font-family: 'DM Sans', sans-serif;
-    font-weight: 600;
-    font-size: 24px;
-    line-height: 1.2;
-    letter-spacing: -0.015em;
+  .nav__tab--active {
     color: var(--text);
-    margin-bottom: 12px;
-  }
-  .ticket__msg {
-    font-size: 15px;
-    line-height: 1.5;
-    color: var(--text-2);
-    max-width: 720px;
-  }
-
-  /* AI ENRICHMENT BUBBLE */
-  .ai {
     position: relative;
-    background: linear-gradient(160deg, rgba(220,90,28,0.10), rgba(220,90,28,0.03));
-    border: 1px solid var(--accent-border);
-    border-radius: 14px;
-    padding: 20px 24px 22px;
   }
-  .ai__header {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 12px;
+  .nav__tab--active::after {
+    content: "";
+    position: absolute;
+    left: 0; right: 0;
+    bottom: -17px;
+    height: 2px;
+    background: var(--text);
   }
-  .ai__badge {
+  .nav__search {
+    margin-left: auto;
+    color: var(--text-3);
+    font-size: 13px;
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    padding: 4px 10px 4px 8px;
-    border-radius: 999px;
+  }
+  .nav__search::before {
+    content: "⌕";
+    font-size: 14px;
+  }
+
+  /* Timeline */
+  .row {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 14px 4px;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+  }
+  .row:last-child { border-bottom: none; }
+  .row__ico {
+    width: 18px; height: 18px;
+    border-radius: 50%;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--text-3);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 11px;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .row__body { flex: 1; min-width: 0; font-size: 14px; line-height: 1.4; color: var(--text-2); }
+  .row__body b { color: var(--text); font-weight: 600; }
+  .row__body em { font-style: normal; color: var(--text-3); }
+  .row__time {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    color: var(--text-3);
+    flex-shrink: 0;
+  }
+  .pill {
+    display: inline-flex;
+    align-items: center;
+    padding: 1px 7px;
+    border-radius: 4px;
+    background: rgba(255,255,255,0.07);
+    font-family: 'IBM Plex Mono', monospace;
+    font-weight: 600;
+    font-size: 11px;
+    color: var(--text-2);
+    letter-spacing: 0.05em;
+    margin-left: 4px;
+  }
+
+  /* System block (the AI enrichment highlight) */
+  .sysblock {
+    margin-top: 10px;
     background: var(--accent-soft);
-    border: 1px solid var(--accent-border);
+    border: 1px solid rgba(220,90,28,0.35);
+    border-radius: 10px;
+    padding: 14px 16px;
+  }
+  .sysblock__head {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid rgba(220,90,28,0.18);
     color: #FFB48A;
     font-family: 'IBM Plex Mono', monospace;
     font-size: 11px;
     letter-spacing: 0.16em;
     text-transform: uppercase;
     font-weight: 600;
+    width: 100%;
   }
-  .ai__dot {
+  .sysblock__head::before {
+    content: "";
     width: 6px; height: 6px;
-    border-radius: 50%;
     background: var(--accent);
+    border-radius: 50%;
     box-shadow: 0 0 0 3px rgba(220,90,28,0.18);
   }
-  .ai__text {
-    font-size: 15px;
+  .sysblock__text {
+    font-size: 14px;
     line-height: 1.55;
     color: var(--text);
   }
-  .ai__text b {
-    color: #FEFEFE;
-    font-weight: 600;
-  }
-  .ai__text em {
+  .sysblock__text b { color: #FEFEFE; font-weight: 600; }
+  .sysblock__text em {
     font-style: normal;
     color: rgba(255,180,140,0.95);
     font-weight: 500;
-  }
-  .ai__action {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    margin-top: 16px;
-    padding-top: 14px;
-    border-top: 1px solid rgba(220,90,28,0.18);
-  }
-  .ai__suggest {
-    flex: 1;
-    font-size: 13px;
-    color: var(--text-2);
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-  .ai__suggest::before {
-    content: "→";
-    color: var(--accent);
-    font-weight: 600;
-  }
-  .ai__suggest b { color: var(--text); font-weight: 600; }
-  .ai__btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 9px 18px;
-    background: var(--accent);
-    color: #FEFEFE;
-    border: none;
-    border-radius: 8px;
-    font-family: 'Inter', sans-serif;
-    font-size: 13px;
-    font-weight: 500;
-    box-shadow: 0 4px 14px rgba(220,90,28,0.30);
-  }
-  .ai__btn::after {
-    content: "▸";
-    font-size: 9px;
   }
 </style>
 </head>
 <body>
   <div class="stage">
 
-    <!-- TICKET CARD -->
-    <div class="ticket">
-      <div class="ticket__meta">
-        <span class="ticket__id"># TKT-004009</span>
-        <span class="pill pill--p1">P1</span>
-        <span class="pill pill--sla">SLA · 33 MIN LEFT</span>
-      </div>
-      <div class="ticket__title">SSO sign-on failing for GitLab</div>
-      <div class="ticket__msg">My account seems to be locked on GitLab. I haven't changed anything recently — can someone help me reset it?</div>
+    <!-- TAB NAV -->
+    <div class="nav">
+      <span class="nav__title">ACTIVITY</span>
+      <span class="nav__ico">⇅</span>
+      <span class="nav__ico">⇲</span>
+      <span class="nav__tab nav__tab--active">All 4</span>
+      <span class="nav__tab">Comments</span>
+      <span class="nav__tab">Changes</span>
+      <span class="nav__tab">Automations</span>
+      <span class="nav__tab">System</span>
+      <span class="nav__search">Search…</span>
     </div>
 
-    <!-- AI ENRICHMENT BUBBLE -->
-    <div class="ai">
-      <div class="ai__header">
-        <span class="ai__badge"><span class="ai__dot"></span>AI Reasoning</span>
+    <!-- TIMELINE -->
+    <div class="row">
+      <span class="row__ico">↑</span>
+      <div class="row__body"><b>Nicholas Khorasani</b> changed priority <span class="pill">P1</span></div>
+      <span class="row__time">2:58 PM</span>
+    </div>
+
+    <div class="row">
+      <span class="row__ico">★</span>
+      <div class="row__body">
+        <b>Enrichment Pipeline</b> enriched with context
+        <div class="sysblock">
+          <span class="sysblock__head">System</span>
+          <p class="sysblock__text">
+            Ticket owner is <b>John Doe</b> — contractor, joined a year ago.
+            Axiom shows he's still on <b>Google Workspace</b> and has <em>no Okta account</em>,
+            though the company has switched to <b>Okta for SSO</b>.
+            Suggested workflow: <b>Onboard John Doe to Okta</b>.
+          </p>
+        </div>
       </div>
-      <p class="ai__text">
-        Ticket owner is <b>John Doe</b> — contractor, joined a year ago.
-        Axiom shows he's still on <b>Google Workspace</b> and has <em>no Okta account</em>.
-        The company has switched to <b>Okta for SSO</b>.
-      </p>
-      <div class="ai__action">
-        <span class="ai__suggest">Suggested workflow: <b>Onboard John Doe to Okta</b></span>
-        <span class="ai__btn">Run</span>
-      </div>
+      <span class="row__time">6:16 PM</span>
+    </div>
+
+    <div class="row">
+      <span class="row__ico">⊕</span>
+      <div class="row__body"><b>Ask Agent</b> on behalf of <em>Samuel Makarovskiy</em>  ticket created</div>
+      <span class="row__time">6:16 PM</span>
     </div>
 
   </div>
