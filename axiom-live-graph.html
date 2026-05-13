@@ -307,28 +307,32 @@
 
       const chips = Array.from(document.querySelectorAll('.sources .chip'));
 
-      // Constellation lines: connect each logo to its 1-2 nearest neighbors
+      // Constellation lines: each logo connects to its single nearest neighbor
       const cls = Array.from(chips).filter(ch => ch.style.display !== 'none');
       const centers = cls.map((chip) => {
         const r = chip.getBoundingClientRect();
         return toStage(r.left + r.width / 2, r.top + r.height / 2);
       });
-      const THRESH = 140;
+      const drawn = new Set();
       for (let i = 0; i < centers.length; i++) {
-        for (let j = i + 1; j < centers.length; j++) {
-          const dx = centers[i].x - centers[j].x;
-          const dy = centers[i].y - centers[j].y;
-          if (Math.hypot(dx, dy) < THRESH) {
-            const line = document.createElementNS(SVG_NS, 'line');
-            line.setAttribute('x1', centers[i].x);
-            line.setAttribute('y1', centers[i].y);
-            line.setAttribute('x2', centers[j].x);
-            line.setAttribute('y2', centers[j].y);
-            line.setAttribute('stroke', 'rgba(220,90,28,0.20)');
-            line.setAttribute('stroke-width', '0.4');
-            svg.appendChild(line);
-          }
+        let min = Infinity, mj = -1;
+        for (let j = 0; j < centers.length; j++) {
+          if (i === j) continue;
+          const d = Math.hypot(centers[i].x - centers[j].x, centers[i].y - centers[j].y);
+          if (d < min) { min = d; mj = j; }
         }
+        if (mj < 0) continue;
+        const key = i < mj ? i + '-' + mj : mj + '-' + i;
+        if (drawn.has(key)) continue;
+        drawn.add(key);
+        const line = document.createElementNS(SVG_NS, 'line');
+        line.setAttribute('x1', centers[i].x);
+        line.setAttribute('y1', centers[i].y);
+        line.setAttribute('x2', centers[mj].x);
+        line.setAttribute('y2', centers[mj].y);
+        line.setAttribute('stroke', 'rgba(220,90,28,0.25)');
+        line.setAttribute('stroke-width', '0.5');
+        svg.appendChild(line);
       }
 
       // Each logo → axiom top
