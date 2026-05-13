@@ -388,9 +388,7 @@
       position: relative;
       padding: 0.34in 0.44in;
       border-radius: var(--radius-xl);
-      background:
-        radial-gradient(ellipse at 88% 50%, rgba(220, 90, 28, 0.05) 0%, transparent 60%),
-        linear-gradient(180deg, var(--cta-tint-a), var(--cta-tint-b));
+      background: linear-gradient(180deg, var(--cta-tint-a), var(--cta-tint-b));
       border: 1px solid var(--border);
       overflow: hidden;
       z-index: 1;
@@ -400,13 +398,7 @@
       gap: 0.4in;
       align-items: center;
     }
-    .cta-band::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 8%; right: 8%;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, var(--ember), transparent);
-    }
+    .cta-band::before { display: none; }
     .cta-band__eyebrow {
       display: block;
       font-family: var(--font-accent);
@@ -611,7 +603,7 @@
         <p>Axiom continuously streams identity, telemetry, tickets, and business context from your existing stack into your STLabs instance — joined, enriched, and in real time.</p>
       </div>
       <div class="spotlight__visual spotlight__visual--graphic" aria-hidden="true">
-        <iframe class="axiom-frame" src="axiom-live-graph.html?v=1778693035" scrolling="no" aria-hidden="true"></iframe>
+        <iframe class="axiom-frame" src="axiom-live-graph.html?v=1778693112" scrolling="no" aria-hidden="true"></iframe>
       </div>
     </div>
 
