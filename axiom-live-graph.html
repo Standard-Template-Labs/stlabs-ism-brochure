@@ -42,6 +42,21 @@
     isolation: isolate;
   }
 
+
+  /* ── Nebula glow + stars behind cluster ── */
+  .nebula {
+    position: absolute;
+    left: 10px; top: -10px;
+    width: 680px; height: 260px;
+    z-index: 0;
+    pointer-events: none;
+    background:
+      radial-gradient(ellipse 36% 60% at 30% 50%, rgba(220, 90, 28, 0.16), transparent 70%),
+      radial-gradient(ellipse 38% 60% at 70% 50%, rgba(110, 160, 255, 0.10), transparent 70%),
+      radial-gradient(ellipse 22% 40% at 50% 30%, rgba(255, 255, 255, 0.06), transparent 75%);
+    filter: blur(18px);
+  }
+
   /* ── CLUSTER (top) ── */
   .sources {
     position: absolute;
@@ -193,6 +208,8 @@
 <body>
   <div class="stage" id="stage">
 
+    <div class="nebula" aria-hidden="true"></div>
+
     <!-- LOGOS (cluster, top) -->
     <div class="sources" id="sources">
       <div class="chip" style="left:20px;top:20px;width:44px;height:44px;" data-name="Microsoft Entra"><span class="chip__mark"><img src="https://cdn.simpleicons.org/microsoftazure/F4F5F6" alt="Microsoft Entra" onerror="this.closest('.chip').style.display='none'" onload="if(!this.naturalWidth){this.closest('.chip').style.display='none';}"></span></div>
@@ -304,6 +321,20 @@
       const axiomBot    = { x: 350, y: 260 };
 
       const chips = Array.from(document.querySelectorAll('.sources .chip'));
+
+      // Background stars (nebula speckle)
+      for (let i = 0; i < 55; i++) {
+        const sx = 20 + Math.random() * 660;
+        const sy = Math.random() * 240;
+        const sr = 0.4 + Math.random() * 1.6;
+        const op = (0.15 + Math.random() * 0.55).toFixed(2);
+        const star = document.createElementNS(SVG_NS, 'circle');
+        star.setAttribute('cx', sx);
+        star.setAttribute('cy', sy);
+        star.setAttribute('r', sr);
+        star.setAttribute('fill', `rgba(244,245,246,${op})`);
+        svg.appendChild(star);
+      }
 
       // Each logo → axiom top
       chips.forEach((chip) => {
