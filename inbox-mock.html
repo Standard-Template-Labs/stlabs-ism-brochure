@@ -179,6 +179,38 @@
     color: rgba(255,180,140,0.95);
     font-weight: 500;
   }
+  .sysblock__action {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+    margin-top: 14px;
+    padding-top: 14px;
+    border-top: 1px solid rgba(220,90,28,0.18);
+  }
+  .sysblock__suggest {
+    flex: 1;
+    font-size: 17px;
+    color: rgba(255,180,140,0.95);
+  }
+  .sysblock__suggest b { color: #FEFEFE; font-weight: 600; }
+  .sysblock__btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--accent);
+    color: #FEFEFE;
+    font-family: 'Inter', sans-serif;
+    font-size: 17px;
+    font-weight: 500;
+    padding: 8px 22px;
+    border-radius: 8px;
+    box-shadow: 0 4px 14px rgba(220,90,28,0.32);
+  }
+  .sysblock__btn::after {
+    content: '▸';
+    font-size: 11px;
+  }
 </style>
 </head>
 <body>
@@ -212,8 +244,11 @@
             Ticket owner is <b>John Doe</b> — contractor, joined a year ago.
             Axiom shows he's still on <b>Google Workspace</b> and has <em>no Okta account</em>,
             though the company has switched to <b>Okta for SSO</b>.
-            Suggested workflow: <b>Onboard John Doe to Okta</b>.
           </p>
+          <div class="sysblock__action">
+            <span class="sysblock__suggest">Suggested: <b>Onboard John Doe to Okta</b></span>
+            <span class="sysblock__btn">Run</span>
+          </div>
         </div>
       </div>
       <span class="row__time">6:16 PM</span>
