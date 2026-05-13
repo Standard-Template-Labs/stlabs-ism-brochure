@@ -371,8 +371,30 @@
       margin: auto 0 0.22in; position: relative; z-index: 1;
     }
     .stats-inline__item {
+      position: relative;
       display: flex; flex-direction: column; align-items: center; justify-content: center;
-      gap: 8px; flex: 1; text-align: center;
+      gap: 6px; flex: 1; text-align: center;
+      padding-top: 0.16in;
+    }
+    .stats-inline__item::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 32px;
+      height: 2px;
+      background: var(--accent);
+      border-radius: 1px;
+    }
+    .stats-inline__eyebrow {
+      font-family: var(--font-accent);
+      font-size: 10px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--accent);
+      margin-bottom: 2px;
     }
     .stats-inline__num {
       font-family: var(--font-display); font-weight: 600; font-size: 44px;
@@ -613,14 +635,14 @@
 
     <div class="spotlight spotlight--stacked">
       <div class="spotlight__visual spotlight__visual--graphic" aria-hidden="true">
-        <iframe class="axiom-frame" src="axiom-live-graph.html?v=1778702354" scrolling="no" aria-hidden="true"></iframe>
+        <iframe class="axiom-frame" src="axiom-live-graph.html?v=1778702412" scrolling="no" aria-hidden="true"></iframe>
       </div>
     </div>
 
     <div class="stats-inline">
-      <div class="stats-inline__item"><span class="stats-inline__num">100+</span><span class="stats-inline__label">Real-time integrations</span></div>
-      <div class="stats-inline__item"><span class="stats-inline__num">0</span><span class="stats-inline__label">Manual CMDB entries</span></div>
-      <div class="stats-inline__item"><span class="stats-inline__num">24 Hours</span><span class="stats-inline__label">From integration to first automation</span></div>
+      <div class="stats-inline__item"><span class="stats-inline__eyebrow">Integrations</span><span class="stats-inline__num">100+</span><span class="stats-inline__label">Real-time integrations</span></div>
+      <div class="stats-inline__item"><span class="stats-inline__eyebrow">CMDB</span><span class="stats-inline__num">0</span><span class="stats-inline__label">Manual CMDB entries</span></div>
+      <div class="stats-inline__item"><span class="stats-inline__eyebrow">Time to value</span><span class="stats-inline__num">24 Hours</span><span class="stats-inline__label">From integration to first automation</span></div>
     </div>
 
     <div class="section-label">Why it works</div>
@@ -721,7 +743,7 @@
         <p class="lead">Inbox clusters incoming work by root cause and attaches the live slice of Axiom that matters. Operators see what's repeating, what's affected, and the one workflow that fixes it once.</p>
       </div>
       <div class="spotlight__visual spotlight__visual--mock">
-        <iframe class="mock-frame" src="inbox-mock.html?v=1778702354" scrolling="no" aria-hidden="true"></iframe>
+        <iframe class="mock-frame" src="inbox-mock.html?v=1778702412" scrolling="no" aria-hidden="true"></iframe>
       </div>
     </div>
 
