@@ -376,6 +376,15 @@
       gap: 6px; flex: 1; text-align: center;
       padding-top: 0.16in;
     }
+    .stats-inline__item + .stats-inline__item::after {
+      content: '';
+      position: absolute;
+      left: calc(-0.2in - 0.5px);
+      top: 16%;
+      bottom: 16%;
+      width: 1px;
+      background: var(--accent-border);
+    }
     .stats-inline__item::before {
       content: '';
       position: absolute;
@@ -397,12 +406,12 @@
       margin-bottom: 2px;
     }
     .stats-inline__num {
-      font-family: var(--font-display); font-weight: 600; font-size: 44px;
+      font-family: var(--font-display); font-weight: 500; font-size: 44px;
       letter-spacing: -0.02em; color: var(--primary); line-height: 1;
       font-variant-numeric: tabular-nums;
     }
     .stats-inline__label {
-      font-size: 12px; font-weight: 500; color: var(--muted-foreground);
+      font-size: 13px; font-weight: 500; color: var(--muted-foreground);
       line-height: 1.4; letter-spacing: 0.01em;
     }
 
@@ -635,7 +644,7 @@
 
     <div class="spotlight spotlight--stacked">
       <div class="spotlight__visual spotlight__visual--graphic" aria-hidden="true">
-        <iframe class="axiom-frame" src="axiom-live-graph.html?v=1778702480" scrolling="no" aria-hidden="true"></iframe>
+        <iframe class="axiom-frame" src="axiom-live-graph.html?v=1778702567" scrolling="no" aria-hidden="true"></iframe>
       </div>
     </div>
 
@@ -743,7 +752,7 @@
         <p class="lead">Inbox clusters incoming work by root cause and attaches the live slice of Axiom that matters. Operators see what's repeating, what's affected, and the one workflow that fixes it once.</p>
       </div>
       <div class="spotlight__visual spotlight__visual--mock">
-        <iframe class="mock-frame" src="inbox-mock.html?v=1778702480" scrolling="no" aria-hidden="true"></iframe>
+        <iframe class="mock-frame" src="inbox-mock.html?v=1778702567" scrolling="no" aria-hidden="true"></iframe>
       </div>
     </div>
 
