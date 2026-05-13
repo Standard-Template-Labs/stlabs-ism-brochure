@@ -357,7 +357,7 @@
         const r = el.getBoundingClientRect();
         const c = toStage(r.left + r.width / 2, r.top);
         const sx = axiomBot.x, sy = axiomBot.y;
-        const ex = c.x, ey = c.y - 5;  // stop just above the outcome's top edge
+        const ex = c.x, ey = c.y - 3;  // stop just above the outcome's top edge
         const dy = ey - sy;
         const d = `M ${sx},${sy} C ${sx},${sy + dy * 0.45} ${ex},${ey - dy * 0.55} ${ex},${ey}`;
         const path = document.createElementNS(SVG_NS, 'path');
