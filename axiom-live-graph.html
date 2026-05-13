@@ -305,12 +305,17 @@
 
       const chips = Array.from(document.querySelectorAll('.sources .chip'));
 
-      // Background stars (nebula speckle)
+      // Background stars (nebula speckle) — seeded so positions stay fixed
+      let _seed = 1729;
+      const rand = () => {
+        _seed = (_seed * 9301 + 49297) % 233280;
+        return _seed / 233280;
+      };
       for (let i = 0; i < 55; i++) {
-        const sx = 20 + Math.random() * 660;
-        const sy = -10 + Math.random() * 200;
-        const sr = 0.4 + Math.random() * 1.6;
-        const op = (0.15 + Math.random() * 0.55).toFixed(2);
+        const sx = 20 + rand() * 660;
+        const sy = -10 + rand() * 200;
+        const sr = 0.4 + rand() * 1.6;
+        const op = (0.15 + rand() * 0.55).toFixed(2);
         const star = document.createElementNS(SVG_NS, 'circle');
         star.setAttribute('cx', sx);
         star.setAttribute('cy', sy);
