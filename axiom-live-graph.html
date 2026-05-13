@@ -314,8 +314,8 @@
         return _seed / 233280;
       };
       for (let i = 0; i < 55; i++) {
-        const sx = 20 + (rand() + rand() + rand()) / 3 * 660;
-        const sy = -10 + (rand() + rand() + rand()) / 3 * 160;
+        const sx = 20 + rand() * 660;
+        const sy = -10 + rand() * 160;
         const sr = 0.4 + rand() * 1.6;
         const op = (0.15 + rand() * 0.55).toFixed(2);
         const star = document.createElementNS(SVG_NS, 'circle');
