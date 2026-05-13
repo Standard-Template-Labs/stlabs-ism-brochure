@@ -307,23 +307,28 @@
 
       const chips = Array.from(document.querySelectorAll('.sources .chip'));
 
-      // Background stars (nebula speckle) — seeded so positions stay fixed
-      let _seed = 1729;
-      const rand = () => {
-        _seed = (_seed * 9301 + 49297) % 233280;
-        return _seed / 233280;
-      };
-      for (let i = 0; i < 55; i++) {
-        const sx = 20 + rand() * 660;
-        const sy = -10 + rand() * 160;
-        const sr = 0.4 + rand() * 1.6;
-        const op = (0.15 + rand() * 0.55).toFixed(2);
-        const star = document.createElementNS(SVG_NS, 'circle');
-        star.setAttribute('cx', sx);
-        star.setAttribute('cy', sy);
-        star.setAttribute('r', sr);
-        star.setAttribute('fill', `rgba(244,245,246,${op})`);
-        svg.appendChild(star);
+      // Constellation lines: connect each logo to its 1-2 nearest neighbors
+      const cls = Array.from(chips).filter(ch => ch.style.display !== 'none');
+      const centers = cls.map((chip) => {
+        const r = chip.getBoundingClientRect();
+        return toStage(r.left + r.width / 2, r.top + r.height / 2);
+      });
+      const THRESH = 140;
+      for (let i = 0; i < centers.length; i++) {
+        for (let j = i + 1; j < centers.length; j++) {
+          const dx = centers[i].x - centers[j].x;
+          const dy = centers[i].y - centers[j].y;
+          if (Math.hypot(dx, dy) < THRESH) {
+            const line = document.createElementNS(SVG_NS, 'line');
+            line.setAttribute('x1', centers[i].x);
+            line.setAttribute('y1', centers[i].y);
+            line.setAttribute('x2', centers[j].x);
+            line.setAttribute('y2', centers[j].y);
+            line.setAttribute('stroke', 'rgba(244,245,246,0.10)');
+            line.setAttribute('stroke-width', '0.4');
+            svg.appendChild(line);
+          }
+        }
       }
 
       // Each logo → axiom top
