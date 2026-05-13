@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<title>Workflows · Natural language</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=DM+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg: #1A1A1F;
+    --surface: rgba(255,255,255,0.04);
+    --surface-2: rgba(255,255,255,0.06);
+    --border: rgba(255,255,255,0.10);
+    --text: rgba(254,254,254,0.92);
+    --text-2: rgba(254,254,254,0.62);
+    --text-3: rgba(254,254,254,0.40);
+    --accent: #DC5A1C;
+    --accent-soft: rgba(220,90,28,0.14);
+    --condition: #F59E0B;
+    --action: #2F6FED;
+    --verify: #1C8A5A;
+  }
+  html, body {
+    width: 403px;
+    height: 227px;
+    overflow: hidden;
+    background: var(--bg);
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    color: var(--text);
+    -webkit-font-smoothing: antialiased;
+  }
+  .stage {
+    width: 900px;
+    height: 506px;
+    transform: scale(0.4478);
+    transform-origin: top left;
+    position: absolute;
+    top: 0; left: 0;
+    padding: 24px 32px;
+    background: var(--bg);
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  /* Natural-language input card */
+  .query {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px 20px;
+  }
+  .query__label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    color: var(--text-3);
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .query__text {
+    font-size: 16px;
+    line-height: 1.45;
+    color: var(--text);
+  }
+
+  /* Arrow between cards */
+  .arrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    color: var(--accent);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+  .arrow::before, .arrow::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: rgba(220, 90, 28, 0.22);
+    max-width: 40px;
+  }
+
+  /* Generated workflow card */
+  .wf {
+    background: linear-gradient(160deg, rgba(220,90,28,0.10), rgba(220,90,28,0.03));
+    border: 1px solid rgba(220,90,28,0.30);
+    border-radius: 12px;
+    padding: 16px 20px 18px;
+  }
+  .wf__title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(220,90,28,0.18);
+  }
+  .wf__title::before {
+    content: "";
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 0 3px rgba(220,90,28,0.18);
+  }
+  .step {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 5px 0;
+  }
+  .step__tag {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 3px 10px;
+    border-radius: 4px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: #1A1A1F;
+    text-transform: uppercase;
+    flex-shrink: 0;
+    min-width: 86px;
+  }
+  .step__tag--condition { background: var(--condition); }
+  .step__tag--action    { background: var(--action); color: #FEFEFE; }
+  .step__tag--verify    { background: var(--verify); color: #FEFEFE; }
+  .step__text {
+    font-size: 15px;
+    line-height: 1.4;
+    color: var(--text);
+  }
+</style>
+</head>
+<body>
+  <div class="stage">
+
+    <!-- Natural language query -->
+    <div class="query">
+      <div class="query__label">Natural language</div>
+      <p class="query__text">We just added GCP as a vendor — make sure all engineers have their GCP provisions set up correctly.</p>
+    </div>
+
+    <div class="arrow">Workflow generated</div>
+
+    <!-- Generated workflow -->
+    <div class="wf">
+      <div class="wf__title">GCP-Provision-Audit</div>
+      <div class="step">
+        <span class="step__tag step__tag--condition">Condition</span>
+        <span class="step__text">For each engineer in Engineering Onboarding</span>
+      </div>
+      <div class="step">
+        <span class="step__tag step__tag--action">Action</span>
+        <span class="step__text">Check GCP project access in Axiom</span>
+      </div>
+      <div class="step">
+        <span class="step__tag step__tag--action">Action</span>
+        <span class="step__text">Grant missing GCP roles via IAM API</span>
+      </div>
+      <div class="step">
+        <span class="step__tag step__tag--verify">Verify</span>
+        <span class="step__text">Confirm GCP login + scope per engineer</span>
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>
