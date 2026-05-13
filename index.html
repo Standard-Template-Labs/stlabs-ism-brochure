@@ -204,8 +204,18 @@
 
     /* Axiom copy in the left column beside the graph */
     .axiom-copy {
-      border-top: 1px solid var(--accent);
-      padding-top: 0.14in;
+      position: relative;
+      padding-top: 0.18in;
+    }
+    .axiom-copy::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 56px;
+      height: 2px;
+      background: var(--accent);
+      border-radius: 1px;
     }
     .axiom-copy h3 {
       font-family: var(--font-display);
