@@ -304,10 +304,12 @@
     .spotlight__visual--graphic iframe { display: block; }
     .spotlight__visual--mock {
       background: transparent;
-      border: none;
+      border: 1px solid var(--surface-stroke);
       box-shadow: none;
-      border-radius: 0;
+      border-radius: var(--radius-md);
       overflow: hidden;
+      max-width: 3.6in;
+      margin-left: auto;
     }
     .spotlight__visual--mock::before { display: none; }
     .mock-frame {
@@ -617,7 +619,7 @@
         <p>Axiom continuously streams identity, telemetry, tickets, and business context from your existing stack into your STLabs instance — joined, enriched, and in real time.</p>
       </div>
       <div class="spotlight__visual spotlight__visual--graphic" aria-hidden="true">
-        <iframe class="axiom-frame" src="axiom-live-graph.html?v=1778699493" scrolling="no" aria-hidden="true"></iframe>
+        <iframe class="axiom-frame" src="axiom-live-graph.html?v=1778700312" scrolling="no" aria-hidden="true"></iframe>
       </div>
     </div>
 
@@ -724,7 +726,7 @@
         <p class="lead">Inbox clusters incoming work by root cause and attaches the live slice of Axiom that matters. Operators see what's repeating, what's affected, and the one workflow that fixes it once.</p>
       </div>
       <div class="spotlight__visual spotlight__visual--mock">
-        <iframe class="mock-frame" src="inbox-mock.html?v=1778700008" scrolling="no" aria-hidden="true"></iframe>
+        <iframe class="mock-frame" src="inbox-mock.html?v=1778700312" scrolling="no" aria-hidden="true"></iframe>
       </div>
     </div>
 
