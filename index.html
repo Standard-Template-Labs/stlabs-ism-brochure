@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>STLabs — Intelligent Service Management (V3)</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=DM+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+
+    :root {
+      --ink: #1A1A1F; --charcoal: #2C2F36; --aubergine: #2A1B24;
+      --mauve-gray: #5A5560; --ember: #DC5A1C; --forest: #1C8A5A;
+      --crimson: #B93737; --cream: #F9F6F1; --cloud: #F4F5F6;
+      --snow: #FEFEFE; --accent-orange: #B84817;
+      --background: var(--ink); --foreground: var(--cloud);
+      --primary: var(--ember); --secondary: var(--charcoal);
+      --muted-foreground: rgba(191, 184, 198, 0.78);
+      --accent: var(--ember); --success: var(--forest);
+      --border: rgba(255, 255, 255, 0.10);
+      --glow: rgba(220, 90, 28, 0.18);
+      --accent-border: rgba(220, 90, 28, 0.22);
+      --font-sans: 'Inter', system-ui, sans-serif;
+      --font-display: 'DM Sans', sans-serif;
+      --font-accent: 'IBM Plex Mono', monospace;
+      --radius-md: 10px;
+      --radius-xl: 14px;
+      --page-bg: var(--ink);
+      --surface-lift: rgba(255, 255, 255, 0.04);
+      --surface-stroke: rgba(255, 255, 255, 0.10);
+      --surface-inset: rgba(255, 255, 255, 0.05);
+      --cta-tint-a: rgba(255, 255, 255, 0.045);
+      --cta-tint-b: rgba(255, 255, 255, 0.015);
+      --shadow-card: 0 4px 12px rgba(0, 0, 0, 0.18);
+      --shadow-cta: 0 4px 14px rgba(0, 0, 0, 0.16);
+      --logo-letter: #FEFEFE;
+      --noise-opacity: 0.025;
+      --graphic-text: #F4F5F6;
+      --graphic-text-faint: rgba(244, 245, 246, 0.55);
+      --graphic-edge-strong: rgba(244, 245, 246, 0.20);
+      --graphic-edge: rgba(244, 245, 246, 0.14);
+      --graphic-edge-faint: rgba(244, 245, 246, 0.10);
+      --graphic-node: #F4F5F6;
+      --graphic-node-soft: rgba(244, 245, 246, 0.70);
+      --graphic-pill-bg: rgba(255, 255, 255, 0.045);
+      --graphic-pill-stroke: rgba(255, 255, 255, 0.10);
+      --graphic-horizon: #FEFEFE;
+    }
+
+    body.light {
+      --ink: #FEFEFE;
+      --background: #FEFEFE;
+      --foreground: #2C2F36;
+      --secondary: #F4F5F7;
+      --muted-foreground: #5A5A63;
+      --border: rgba(26, 26, 31, 0.10);
+      --glow: rgba(220, 90, 28, 0.10);
+      --accent-border: rgba(220, 90, 28, 0.22);
+      --accent: #DC5A1C;
+      --primary: #DC5A1C;
+      --page-bg: #FEFEFE;
+      --surface-lift: rgba(26, 26, 31, 0.035);
+      --surface-stroke: rgba(26, 26, 31, 0.10);
+      --surface-inset: rgba(26, 26, 31, 0.04);
+      --cta-tint-a: rgba(26, 26, 31, 0.04);
+      --cta-tint-b: rgba(26, 26, 31, 0.015);
+      --shadow-card: 0 3px 10px rgba(26, 26, 31, 0.05);
+      --shadow-cta: 0 3px 12px rgba(26, 26, 31, 0.04);
+      --logo-letter: #2C2F36;
+      --noise-opacity: 0.018;
+      --graphic-text: #2C2F36;
+      --graphic-text-faint: rgba(44, 47, 54, 0.55);
+      --graphic-edge-strong: rgba(26, 26, 31, 0.22);
+      --graphic-edge: rgba(26, 26, 31, 0.14);
+      --graphic-edge-faint: rgba(26, 26, 31, 0.08);
+      --graphic-node: #2C2F36;
+      --graphic-node-soft: rgba(44, 47, 54, 0.55);
+      --graphic-pill-bg: rgba(26, 26, 31, 0.035);
+      --graphic-pill-stroke: rgba(26, 26, 31, 0.10);
+      --graphic-horizon: #1A1A1F;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    @page { size: letter; margin: 0; }
+
+    html { background: var(--page-bg); min-height: 100%; }
+    body {
+      font-family: var(--font-sans); background: var(--background); color: var(--foreground);
+      margin: 0 auto; width: 8.5in; -webkit-font-smoothing: antialiased;
+    }
+
+    .page {
+      width: 8.5in; min-height: 11in; padding: 0.5in 0.6in 0.4in;
+      display: flex; flex-direction: column; position: relative;
+    }
+    .page::after {
+      content: ''; position: absolute; inset: 0; pointer-events: none;
+      z-index: 2; opacity: var(--noise-opacity);
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-repeat: repeat; background-size: 256px;
+    }
+    .page--two { break-before: page; page-break-before: always; border-top: 1px solid var(--border); }
+    @media print {
+      .page { height: 11in; min-height: 0; overflow: hidden; }
+      .page--two { border-top: none; }
+    }
+
+    .hero-glow {
+      position: absolute; top: 0.4in; left: -1in;
+      width: 6in; height: 3.4in;
+      background: radial-gradient(ellipse, var(--glow) 0%, transparent 65%);
+      pointer-events: none; z-index: 0; opacity: 0.55;
+    }
+
+    /* ── Header ── */
+    .header {
+      display: flex; justify-content: space-between; align-items: center;
+      padding-bottom: 0.2in;
+      position: relative; z-index: 1;
+    }
+    .logo svg { height: 20px; width: auto; }
+    .header-right { display: flex; align-items: center; gap: 10px; }
+    .header-tag {
+      font-family: var(--font-accent); font-size: 10px; font-weight: 600;
+      color: var(--muted-foreground); text-transform: uppercase; letter-spacing: 0.16em;
+    }
+    .header-sep { color: var(--muted-foreground); opacity: 0.4; font-size: 10px; }
+
+    /* ── Page footer ── */
+    .page-footer {
+      margin-top: 0.18in;
+      padding-top: 0.18in;
+      display: flex; justify-content: space-between; align-items: center;
+      position: relative; z-index: 1;
+    }
+    .page-footer__copy {
+      font-family: var(--font-sans);
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--muted-foreground);
+      letter-spacing: 0.01em;
+    }
+    .page-footer__url {
+      font-family: var(--font-sans);
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--accent);
+      text-decoration: none;
+      letter-spacing: 0.01em;
+    }
+
+    /* ── Hero (medium) ── */
+    .hero {
+      padding: 0.22in 0 0.28in; position: relative; z-index: 1;
+    }
+    .hero h1 {
+      font-family: var(--font-display); font-weight: 600; font-size: 38px;
+      letter-spacing: -0.02em; line-height: 1.08; color: var(--foreground);
+      margin-bottom: 0.16in;
+    }
+    .hero h1 em {
+      font-style: normal;
+      color: var(--primary);
+    }
+    .hero p {
+      font-size: 14px; line-height: 1.7; color: var(--muted-foreground);
+    }
+
+    /* ── Section labels ── */
+    .section-label {
+      font-family: var(--font-accent); font-size: 12px; font-weight: 600;
+      text-transform: uppercase; letter-spacing: 0.14em; color: var(--accent);
+      margin-bottom: 0.18in; position: relative; z-index: 1;
+    }
+
+    /* ── Feature spotlight (V3 signature) ── */
+    .spotlight {
+      display: grid; grid-template-columns: 1.9in 1fr; gap: 0.28in;
+      align-items: start; margin-bottom: 0.24in;
+      position: relative; z-index: 1;
+    }
+    .spotlight__visual { order: 2; }
+    .spotlight--stacked {
+      display: flex; flex-direction: column; gap: 0.18in;
+      align-items: stretch;
+      margin-bottom: 0.32in;
+    }
+    /* Full-width intro above the graph */
+    .spotlight-intro {
+      margin-bottom: 0.24in;
+      position: relative; z-index: 1;
+    }
+    .spotlight-intro + .spotlight {
+      margin-top: 0.2in;
+      margin-bottom: 0.36in;
+    }
+    .spotlight-intro h2 {
+      font-family: var(--font-display); font-weight: 600; font-size: 17px;
+      letter-spacing: -0.015em; line-height: 1.25; color: var(--foreground);
+      margin-bottom: 0.1in;
+      text-wrap: balance;
+    }
+    .spotlight-intro p.lead {
+      font-size: 14px; line-height: 1.6; color: var(--muted-foreground);
+      margin: 0;
+    }
+
+    /* Axiom copy in the left column beside the graph */
+    .axiom-copy h3 {
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 17px;
+      letter-spacing: -0.015em;
+      line-height: 1.25;
+      color: var(--foreground);
+      margin-bottom: 0.08in;
+      white-space: nowrap;
+    }
+    .axiom-copy h3 em {
+      font-style: normal;
+      color: var(--accent);
+    }
+    .axiom-copy p {
+      font-size: 13px;
+      line-height: 1.55;
+      color: var(--muted-foreground);
+    }
+
+    .spotlight__visual--graphic {
+      aspect-ratio: 1 / 1;
+      border: none;
+      background: transparent;
+      box-shadow: none;
+      border-radius: 0;
+      overflow: hidden;
+    }
+    .axiom-frame {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+      pointer-events: none;
+    }
+    .spotlight__visual {
+      aspect-ratio: 16 / 10; background: var(--surface-lift);
+      border: 1px solid var(--surface-stroke); border-radius: var(--radius-xl);
+      overflow: hidden; position: relative;
+      box-shadow: var(--shadow-card), inset 0 1px 0 var(--surface-inset);
+    }
+    .spotlight__visual::before {
+      content: "Drop screenshot at " attr(data-src);
+      position: absolute; inset: 0;
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-accent); font-size: 10px; color: var(--muted-foreground);
+      letter-spacing: 0.04em; text-align: center; padding: 0 16px;
+    }
+    .spotlight__visual img {
+      position: relative; z-index: 1; display: block;
+      width: 100%; height: 100%; object-fit: cover;
+    }
+    .spotlight__visual img.missing { display: none; }
+
+    .spotlight__index {
+      font-family: var(--font-accent); font-size: 11px; font-weight: 600;
+      color: var(--accent); letter-spacing: 0.18em; margin-bottom: 0.1in;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .spotlight__index::after {
+      content: ''; flex: 0 0 28px; height: 1px; background: var(--accent-border);
+    }
+    .spotlight__eyebrow {
+      font-family: var(--font-accent); font-size: 10px; font-weight: 600;
+      text-transform: uppercase; letter-spacing: 0.14em;
+      color: var(--muted-foreground); margin-bottom: 0.06in;
+    }
+
+    /* Product title (eyebrow style, matches .section-label) */
+    .product-title {
+      font-family: var(--font-accent);
+      font-weight: 600;
+      font-size: 12px;
+      line-height: 1.2;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--accent);
+      margin-bottom: 0.18in;
+      position: relative;
+      z-index: 1;
+    }
+
+    .spotlight__visual--graphic::before { display: none; }
+    .spotlight__visual--graphic iframe { display: block; }
+
+    /* Page 2: compact surface spotlights (3 per page) */
+    .page--two .product-title {
+      margin-top: 0.22in;
+      margin-bottom: 0.18in;
+    }
+    .page--two .product-title:first-of-type {
+      margin-top: 0;
+    }
+    .page--two .spotlight {
+      grid-template-columns: 1fr 1.5fr;
+      gap: 0.3in;
+      margin-bottom: 0.24in;
+    }
+    .page--two .spotlight__visual { aspect-ratio: 16 / 9; }
+    .page--two .spotlight h2 {
+      font-size: 17px;
+      line-height: 1.25;
+      margin-bottom: 0.08in;
+    }
+    .page--two .spotlight p.lead {
+      font-size: 14px;
+      line-height: 1.6;
+      margin-bottom: 0;
+    }
+    .spotlight h2 {
+      font-family: var(--font-display); font-weight: 600; font-size: 20px;
+      letter-spacing: -0.01em; line-height: 1.22; color: var(--foreground);
+      margin-bottom: 0.1in;
+      text-wrap: balance;
+    }
+    .spotlight p.lead {
+      font-size: 14px; line-height: 1.6; color: var(--muted-foreground);
+      margin-bottom: 0.14in;
+    }
+    .spotlight .facts {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 0.14in 0.2in;
+      padding-top: 0.12in;
+    }
+    .spotlight .facts dt {
+      font-family: var(--font-accent); font-size: 9px; font-weight: 600;
+      text-transform: uppercase; letter-spacing: 0.12em;
+      color: var(--muted-foreground); margin-bottom: 4px;
+    }
+    .spotlight .facts dd {
+      font-size: 11px; line-height: 1.45; color: var(--foreground); font-weight: 500;
+    }
+
+    /* ── Stats inline strip ── */
+    .stats-inline {
+      display: flex; gap: 0.4in; padding: 0.18in 0; align-items: stretch;
+      margin: auto 0 0.22in; position: relative; z-index: 1;
+    }
+    .stats-inline__item {
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      gap: 8px; flex: 1; text-align: center;
+    }
+    .stats-inline__item + .stats-inline__item { border-left: 1px solid var(--border); }
+    .stats-inline__num {
+      font-family: var(--font-display); font-weight: 600; font-size: 44px;
+      letter-spacing: -0.02em; color: var(--primary); line-height: 1;
+      font-variant-numeric: tabular-nums;
+    }
+    .stats-inline__label {
+      font-size: 12px; font-weight: 500; color: var(--muted-foreground);
+      line-height: 1.4; letter-spacing: 0.01em;
+    }
+
+    /* ── Differentiators ── */
+    .diff-grid {
+      display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0.26in;
+      margin-bottom: 0.16in; position: relative; z-index: 1;
+    }
+    .diff-item { padding-left: 0.16in; border-left: 2px solid var(--accent-border); }
+    .diff-item h4 {
+      font-family: var(--font-display); font-weight: 600; font-size: 17px;
+      color: var(--foreground); margin-bottom: 0.08in; letter-spacing: -0.015em; line-height: 1.25;
+    }
+    .diff-item p { font-size: 12.5px; line-height: 1.55; color: var(--muted-foreground); }
+
+    /* ── CTA band (page 2 close) ── */
+    .cta-band {
+      margin-top: auto;
+      position: relative;
+      padding: 0.34in 0.44in;
+      border-radius: var(--radius-xl);
+      background:
+        radial-gradient(ellipse at 88% 50%, rgba(220, 90, 28, 0.05) 0%, transparent 60%),
+        linear-gradient(180deg, var(--cta-tint-a), var(--cta-tint-b));
+      border: 1px solid var(--border);
+      overflow: hidden;
+      z-index: 1;
+      box-shadow: none;
+      display: grid;
+      grid-template-columns: 1.35fr 1fr;
+      gap: 0.4in;
+      align-items: center;
+    }
+    .cta-band::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 8%; right: 8%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--ember), transparent);
+    }
+    .cta-band__eyebrow {
+      display: block;
+      font-family: var(--font-accent);
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--accent);
+      margin-bottom: 0.18in;
+    }
+    .cta-band__headline {
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 24px;
+      letter-spacing: -0.015em;
+      line-height: 1.18;
+      color: var(--foreground);
+      margin: 0 0 0.12in;
+    }
+    .cta-band__sub {
+      font-size: 13px;
+      line-height: 1.6;
+      color: var(--muted-foreground);
+      margin: 0;
+    }
+    .cta-band__actions {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      align-items: stretch;
+    }
+    .cta-band__primary,
+    .cta-band__secondary {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      font-family: var(--font-sans);
+      font-weight: 500;
+      text-decoration: none;
+      padding: 12px 18px;
+      border-radius: var(--radius-md);
+      letter-spacing: 0.01em;
+      transition: transform 0.12s ease;
+    }
+    .cta-band__primary {
+      font-size: 14px;
+      color: var(--snow);
+      background: var(--ember);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      box-shadow:
+        0 6px 18px rgba(220, 90, 28, 0.32),
+        inset 0 1px 0 rgba(255, 255, 255, 0.20);
+    }
+    .cta-band__secondary {
+      font-size: 13px;
+      color: var(--foreground);
+      background: transparent;
+      border: 1px solid var(--border);
+    }
+    .cta-band__primary svg,
+    .cta-band__secondary svg {
+      width: 15px; height: 15px;
+      flex-shrink: 0;
+      stroke: currentColor;
+      opacity: 0.9;
+    }
+
+    /* ── Inline Slack mock (Ask spotlight) ── */
+    .spotlight__visual--inline {
+      background: transparent;
+      border: none;
+      box-shadow: none;
+    }
+    .spotlight__visual--inline::before { display: none; }
+    .slack-mock__back {
+      position: absolute;
+      top: 6px; left: 28px; right: 28px;
+      height: 34px;
+      background: #16161A;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 10px;
+      padding: 8px 14px;
+      z-index: 0;
+    }
+    .slack-mock__back-logo svg { width: 14px; height: 14px; display: block; opacity: 0.7; }
+    .slack-mock {
+      position: absolute;
+      top: 24px; left: 10px; right: 10px; bottom: 10px;
+      padding: 14px 18px 18px;
+      background: #1A1A1F;
+      border: 1px solid rgba(255,255,255,0.10);
+      border-radius: 12px;
+      display: flex; flex-direction: column; gap: 9px;
+      font-family: var(--font-sans); color: #F4F5F6;
+      z-index: 1;
+    }
+    .slack-mock__logo svg { width: 16px; height: 16px; display: block; }
+    .slack-mock__msg {
+      display: flex; gap: 10px; align-items: flex-start;
+    }
+    .slack-mock__avatar {
+      width: 26px; height: 26px; border-radius: 6px;
+      background: linear-gradient(135deg, #4A90E2, #1C5BAA);
+      color: white; font-weight: 600; font-size: 10px;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .slack-mock__avatar--bot {
+      background: var(--ember); color: #FEFEFE;
+    }
+    .slack-mock__avatar--bot svg { width: 16px; height: auto; }
+    .slack-mock__body { flex: 1; min-width: 0; }
+    .slack-mock__head {
+      display: flex; align-items: center; gap: 6px; margin-bottom: 2px;
+    }
+    .slack-mock__name {
+      font-weight: 700; font-size: 11px; color: #F4F5F6; letter-spacing: -0.005em;
+    }
+    .slack-mock__badge {
+      font-size: 7px; font-weight: 700;
+      background: rgba(255,255,255,0.08); color: rgba(244,245,246,0.55);
+      padding: 1px 5px; border-radius: 3px; letter-spacing: 0.05em;
+    }
+    .slack-mock__time {
+      font-size: 9px; color: rgba(244,245,246,0.42); font-weight: 400;
+    }
+    .slack-mock__text {
+      font-size: 11px; line-height: 1.4; color: #F4F5F6; margin-top: 1px;
+    }
+    .slack-mock__text strong { font-weight: 700; }
+    .slack-mock__divider {
+      display: flex; align-items: center; gap: 8px;
+      margin-left: 36px;
+      font-size: 9px; color: rgba(244,245,246,0.42);
+    }
+    .slack-mock__divider::after {
+      content: ''; flex: 1; height: 1px; background: rgba(255,255,255,0.10);
+    }
+
+    /* ── Light-mode component overrides ── */
+    body.light .logo path[fill="#fff"] { fill: var(--logo-letter); }
+    body.light .spotlight__visual--graphic text[fill="#F4F5F6"] { fill: var(--graphic-text); }
+    body.light .spotlight__visual--graphic text[fill="rgba(244,245,246,0.55)"] { fill: var(--graphic-text-faint); }
+    body.light .spotlight__visual--graphic g[font-family] text { fill: var(--graphic-text); }
+    body.light .spotlight__visual--graphic rect[fill="rgba(255,255,255,0.045)"] {
+      fill: var(--graphic-pill-bg);
+      stroke: var(--graphic-pill-stroke);
+    }
+    body.light .spotlight__visual--graphic g[opacity="0.05"] line { stroke: var(--graphic-horizon); }
+    body.light .spotlight__visual--graphic g[stroke="rgba(244,245,246,0.20)"] line { stroke: var(--graphic-edge-strong); }
+    body.light .spotlight__visual--graphic g[stroke="rgba(244,245,246,0.14)"] line { stroke: var(--graphic-edge); }
+    body.light .spotlight__visual--graphic g[stroke="rgba(244,245,246,0.10)"] line { stroke: var(--graphic-edge-faint); }
+    body.light .spotlight__visual--graphic g[fill="#F4F5F6"] circle { fill: var(--graphic-node); }
+    body.light .spotlight__visual--graphic g[fill="rgba(244,245,246,0.70)"] circle { fill: var(--graphic-node-soft); }
+
+    /* ── Theme toggle (preview only; hidden in print) ── */
+    .theme-toggle {
+      position: fixed; top: 16px; right: 16px; z-index: 100;
+      width: 36px; height: 36px; border-radius: 50%;
+      background: var(--surface-lift); border: 1px solid var(--surface-stroke);
+      color: var(--foreground); cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 15px; line-height: 1;
+      transition: transform 0.15s ease;
+    }
+    .theme-toggle:hover { transform: scale(1.05); }
+    @media print { .theme-toggle { display: none; } }
+
+    @media print {
+      body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    }
+  </style>
+</head>
+<body>
+
+  <button class="theme-toggle" type="button" aria-label="Toggle theme" onclick="document.body.classList.toggle('light')">◐</button>
+
+  <!-- ═════════ PAGE 1 ═════════ -->
+  <article class="page">
+    <div class="header">
+      <div class="logo"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 770.014 184"><path d="M244.522,91.839c0-9.882,6.032-18.191,14.22-20.622V21.5c0-11.352-9.202-20.554-20.554-20.554H20.554C9.202.946,0,10.148,0,21.5v49.663c8.353,2.375,14.53,10.809,14.53,20.849s-6.177,18.473-14.53,20.849v49.64c0,11.352,9.202,20.554,20.554,20.554h217.633c11.352,0,20.554-9.202,20.554-20.554v-50.039c-8.188-2.431-14.22-10.741-14.22-20.622ZM222.174,146.482H60.241l-23.674,11.247V37.449h185.607v109.032Z" fill="#DC5A1C"></path><rect x="86.773" y="72.657" width="21.552" height="38.364" rx="9.882" ry="9.882" fill="#DC5A1C"></rect><rect x="150.726" y="72.657" width="21.552" height="38.364" rx="9.882" ry="9.882" fill="#DC5A1C"></rect><path d="M358.962,146.903c-7.846,0-14.402-1.149-19.665-3.443-5.267-2.294-9.243-5.45-11.928-9.468-2.687-4.015-4.246-8.685-4.675-14.006h18.215c.322,2.296,1.181,4.436,2.579,6.416,1.396,1.983,3.357,3.575,5.884,4.773,2.524,1.201,5.723,1.8,9.591,1.8,3.224,0,5.964-.443,8.221-1.33,2.257-.885,3.949-2.191,5.078-3.912,1.129-1.721,1.692-3.624,1.692-5.712,0-2.817-.725-5.008-2.176-6.572-1.451-1.565-3.521-2.79-6.206-3.678-2.687-.885-6.019-1.643-9.994-2.269-4.73-.626-8.974-1.511-12.734-2.66-3.763-1.147-6.959-2.661-9.591-4.539-2.634-1.878-4.649-4.198-6.045-6.964-1.398-2.763-2.095-6.077-2.095-9.938,0-4.59,1.262-8.685,3.788-12.285,2.524-3.6,6.206-6.441,11.041-8.529,4.836-2.086,10.583-3.13,17.248-3.13,9.672,0,17.272,2.088,22.808,6.26,5.534,4.174,8.838,10.016,9.913,17.527h-17.248c-.645-3.025-2.312-5.423-4.997-7.199-2.687-1.773-6.286-2.661-10.8-2.661s-7.979.837-10.397,2.504c-2.418,1.67-3.627,3.912-3.627,6.729,0,1.984.537,3.732,1.612,5.243,1.073,1.514,2.982,2.817,5.722,3.912,2.74,1.096,6.367,1.956,10.881,2.582,6.662.939,12.331,2.218,17.006,3.834,4.675,1.619,8.221,4.044,10.638,7.277,2.418,3.235,3.571,7.722,3.466,13.459,0,5.426-1.37,10.07-4.11,13.928-2.74,3.861-6.584,6.835-11.525,8.92-4.944,2.086-10.8,3.13-17.57,3.13Z" fill="#fff"></path><path d="M442.131,145.025c-5.267,0-9.861-.807-13.782-2.426-3.924-1.616-6.959-4.304-9.107-8.06-2.151-3.756-3.224-8.92-3.224-15.493v-41.002h-14.668v-14.711h14.668v-17.308s18.053-8.576,18.053-8.576v25.884h22.728v14.711h-22.728v41.158c0,4.174.912,7.042,2.74,8.607,1.826,1.565,4.942,2.347,9.349,2.347h10.478v14.867h-14.507Z" fill="#fff"></path><path d="M477.245,145.025V46.026l18.053-8.577v107.576h-18.053Z" fill="#fff"></path><path d="M542.719,146.903c-6.447,0-11.875-1.149-16.28-3.443-4.407-2.294-7.657-5.345-9.752-9.155-2.095-3.807-3.143-7.954-3.143-12.441,0-5.008,1.315-9.414,3.949-13.224,2.632-3.807,6.528-6.729,11.687-8.764,5.158-2.034,11.389-3.052,18.698-3.052h20.31c0-4.695-.539-8.58-1.612-11.659-1.075-3.076-2.849-5.399-5.319-6.964-2.473-1.565-5.911-2.348-10.316-2.348s-8.087.993-11.042,2.973c-2.957,1.983-4.81,4.905-5.561,8.764h-17.892c.645-5.529,2.524-10.197,5.642-14.006,3.115-3.807,7.198-6.781,12.25-8.92,5.05-2.137,10.583-3.208,16.603-3.208,7.737,0,14.238,1.279,19.504,3.834,5.264,2.558,9.213,6.209,11.847,10.955,2.632,4.749,3.949,10.461,3.949,17.137v51.644h-15.475l-1.773-12.989c-1.075,2.088-2.446,4.044-4.111,5.869-1.667,1.827-3.602,3.419-5.803,4.773-2.204,1.357-4.675,2.399-7.415,3.13-2.74.729-5.722,1.096-8.946,1.096ZM543.956,132.975c3.007,0,5.803-.65,8.382-1.956,2.579-1.303,4.78-3.052,6.609-5.243,1.826-2.191,3.305-4.668,4.433-7.434,1.129-2.763,1.745-5.763,1.854-8.998v-.783h-17.892c-4.191,0-7.551.496-10.074,1.486-2.526.993-4.352,2.426-5.481,4.304-1.129,1.878-1.693,3.966-1.693,6.26,0,2.609.537,4.8,1.612,6.573,1.073,1.775,2.685,3.184,4.836,4.225,2.148,1.044,4.619,1.565,7.415,1.565Z" fill="#fff"></path><path d="M651.45,146.903c-4.836,0-9.002-.653-12.493-1.956-3.493-1.303-6.448-2.973-8.866-5.008-2.418-2.034-4.432-4.093-6.044-6.182l-1.773,11.268h-16.119V37.449h18.053v37.778c2.685-4.485,6.367-7.903,11.042-10.251,4.675-2.347,9.966-3.521,15.877-3.521,7.629,0,14.318,1.826,20.068,5.477,5.748,3.653,10.261,8.661,13.54,15.024,3.277,6.365,4.917,13.72,4.917,22.066,0,8.138-1.612,15.469-4.836,21.988-3.224,6.521-7.712,11.635-13.459,15.336-5.75,3.702-12.387,5.556-19.907,5.556ZM647.581,131.723c4.619,0,8.676-1.12,12.17-3.365,3.491-2.243,6.259-5.424,8.301-9.546,2.04-4.121,3.063-8.999,3.063-14.633,0-5.528-1.022-10.38-3.063-14.554-2.043-4.171-4.81-7.38-8.301-9.624-3.493-2.243-7.551-3.365-12.17-3.365-4.73,0-8.841,1.149-12.331,3.443-3.493,2.296-6.234,5.504-8.221,9.625-1.99,4.123-2.982,8.947-2.982,14.476,0,5.634.992,10.486,2.982,14.555,1.987,4.069,4.728,7.253,8.221,9.546,3.491,2.296,7.601,3.443,12.331,3.443Z" fill="#fff"></path><path d="M736.802,146.903c-7.845,0-14.402-1.149-19.665-3.443-5.267-2.294-9.243-5.45-11.928-9.468-2.687-4.015-4.246-8.685-4.675-14.006h18.215c.323,2.296,1.181,4.436,2.579,6.416,1.395,1.983,3.357,3.575,5.884,4.773,2.524,1.201,5.722,1.8,9.591,1.8,3.224,0,5.964-.443,8.221-1.33,2.257-.885,3.949-2.191,5.078-3.912,1.129-1.721,1.693-3.624,1.693-5.712,0-2.817-.726-5.008-2.176-6.572-1.451-1.565-3.521-2.79-6.206-3.678-2.687-.885-6.019-1.643-9.994-2.269-4.73-.626-8.974-1.511-12.734-2.66-3.763-1.147-6.959-2.661-9.591-4.539-2.634-1.878-4.649-4.198-6.044-6.964-1.398-2.763-2.096-6.077-2.096-9.938,0-4.59,1.262-8.685,3.788-12.285,2.524-3.6,6.206-6.441,11.041-8.529,4.836-2.086,10.583-3.13,17.248-3.13,9.672,0,17.273,2.088,22.808,6.26,5.534,4.174,8.838,10.016,9.913,17.527h-17.248c-.645-3.025-2.312-5.423-4.997-7.199-2.687-1.773-6.286-2.661-10.8-2.661s-7.979.837-10.397,2.504c-2.418,1.67-3.626,3.912-3.626,6.729,0,1.984.536,3.732,1.612,5.243,1.073,1.514,2.982,2.817,5.723,3.912,2.74,1.096,6.367,1.956,10.88,2.582,6.662.939,12.331,2.218,17.006,3.834,4.675,1.619,8.221,4.044,10.638,7.277,2.418,3.235,3.571,7.722,3.466,13.459,0,5.426-1.37,10.07-4.11,13.928-2.74,3.861-6.584,6.835-11.525,8.92-4.944,2.086-10.8,3.13-17.57,3.13Z" fill="#fff"></path></svg></div>
+      <div class="header-right">
+        <span class="header-tag">Intelligent Service Management Platform</span>
+      </div>
+    </div>
+
+    <div class="hero">
+      <h1>Automate the ordinary.<br><em>Solve the complex.</em></h1>
+      <p>The AI-first Service Management Platform, powered by real-time integrations across your business. Address issues with live data in the moment — instead of turning them into tickets while you context-switch between systems.</p>
+    </div>
+
+    <div class="product-title">Real-Time Graph, Not Stale CMDB</div>
+    <div class="spotlight-intro">
+      <h2>Automation Powered by Real Data in Axiom</h2>
+      <p class="lead">A live model of the people, devices, apps, and infrastructure in your business — continuously synced from the systems you already run. Arm your AI agents with a real-time view of your business.</p>
+    </div>
+
+    <div class="spotlight">
+      <div class="axiom-copy">
+        <h3>One live graph.<br>Every tool you know.<br><em>Flowing into STLabs.</em></h3>
+        <p>Axiom continuously streams identity, telemetry, tickets, and business context from your existing stack into your STLabs instance — joined, enriched, and in real time.</p>
+      </div>
+      <div class="spotlight__visual spotlight__visual--graphic" aria-hidden="true">
+        <iframe class="axiom-frame" src="axiom-live-graph.html" scrolling="no" aria-hidden="true"></iframe>
+      </div>
+    </div>
+
+    <div class="stats-inline">
+      <div class="stats-inline__item"><span class="stats-inline__num">100+</span><span class="stats-inline__label">Real-time integrations</span></div>
+      <div class="stats-inline__item"><span class="stats-inline__num">Days</span><span class="stats-inline__label">From integration to automation</span></div>
+    </div>
+
+    <div class="section-label">Why it works</div>
+    <div class="diff-grid">
+      <div class="diff-item">
+        <h4>Live graph for real data</h4>
+        <p>Every action reasons against Axiom's current state — not yesterday's snapshot, not a stale CMDB.</p>
+      </div>
+      <div class="diff-item">
+        <h4>Self-maintaining</h4>
+        <p>Axiom is a real-time view on your existing systems, so it detects anomalous changes proactively.</p>
+      </div>
+      <div class="diff-item">
+        <h4>Deterministic execution</h4>
+        <p>AI designs the logic and writes deterministic code to execute your workflows the same way every time.</p>
+      </div>
+    </div>
+
+    <div class="page-footer">
+      <span class="page-footer__copy">© STLabs 2026</span>
+      <a class="page-footer__url" href="https://stlabs.com/">stlabs.com</a>
+    </div>
+  </article>
+
+  <!-- ═════════ PAGE 2 ═════════ -->
+  <article class="page page--two">
+    <div class="header">
+      <div class="logo"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 770.014 184" style="height:18px"><path d="M244.522,91.839c0-9.882,6.032-18.191,14.22-20.622V21.5c0-11.352-9.202-20.554-20.554-20.554H20.554C9.202.946,0,10.148,0,21.5v49.663c8.353,2.375,14.53,10.809,14.53,20.849s-6.177,18.473-14.53,20.849v49.64c0,11.352,9.202,20.554,20.554,20.554h217.633c11.352,0,20.554-9.202,20.554-20.554v-50.039c-8.188-2.431-14.22-10.741-14.22-20.622ZM222.174,146.482H60.241l-23.674,11.247V37.449h185.607v109.032Z" fill="#DC5A1C"></path><rect x="86.773" y="72.657" width="21.552" height="38.364" rx="9.882" ry="9.882" fill="#DC5A1C"></rect><rect x="150.726" y="72.657" width="21.552" height="38.364" rx="9.882" ry="9.882" fill="#DC5A1C"></rect><path d="M358.962,146.903c-7.846,0-14.402-1.149-19.665-3.443-5.267-2.294-9.243-5.45-11.928-9.468-2.687-4.015-4.246-8.685-4.675-14.006h18.215c.322,2.296,1.181,4.436,2.579,6.416,1.396,1.983,3.357,3.575,5.884,4.773,2.524,1.201,5.723,1.8,9.591,1.8,3.224,0,5.964-.443,8.221-1.33,2.257-.885,3.949-2.191,5.078-3.912,1.129-1.721,1.692-3.624,1.692-5.712,0-2.817-.725-5.008-2.176-6.572-1.451-1.565-3.521-2.79-6.206-3.678-2.687-.885-6.019-1.643-9.994-2.269-4.73-.626-8.974-1.511-12.734-2.66-3.763-1.147-6.959-2.661-9.591-4.539-2.634-1.878-4.649-4.198-6.045-6.964-1.398-2.763-2.095-6.077-2.095-9.938,0-4.59,1.262-8.685,3.788-12.285,2.524-3.6,6.206-6.441,11.041-8.529,4.836-2.086,10.583-3.13,17.248-3.13,9.672,0,17.272,2.088,22.808,6.26,5.534,4.174,8.838,10.016,9.913,17.527h-17.248c-.645-3.025-2.312-5.423-4.997-7.199-2.687-1.773-6.286-2.661-10.8-2.661s-7.979.837-10.397,2.504c-2.418,1.67-3.627,3.912-3.627,6.729,0,1.984.537,3.732,1.612,5.243,1.073,1.514,2.982,2.817,5.722,3.912,2.74,1.096,6.367,1.956,10.881,2.582,6.662.939,12.331,2.218,17.006,3.834,4.675,1.619,8.221,4.044,10.638,7.277,2.418,3.235,3.571,7.722,3.466,13.459,0,5.426-1.37,10.07-4.11,13.928-2.74,3.861-6.584,6.835-11.525,8.92-4.944,2.086-10.8,3.13-17.57,3.13Z" fill="#fff"></path><path d="M442.131,145.025c-5.267,0-9.861-.807-13.782-2.426-3.924-1.616-6.959-4.304-9.107-8.06-2.151-3.756-3.224-8.92-3.224-15.493v-41.002h-14.668v-14.711h14.668v-17.308s18.053-8.576,18.053-8.576v25.884h22.728v14.711h-22.728v41.158c0,4.174.912,7.042,2.74,8.607,1.826,1.565,4.942,2.347,9.349,2.347h10.478v14.867h-14.507Z" fill="#fff"></path><path d="M477.245,145.025V46.026l18.053-8.577v107.576h-18.053Z" fill="#fff"></path><path d="M542.719,146.903c-6.447,0-11.875-1.149-16.28-3.443-4.407-2.294-7.657-5.345-9.752-9.155-2.095-3.807-3.143-7.954-3.143-12.441,0-5.008,1.315-9.414,3.949-13.224,2.632-3.807,6.528-6.729,11.687-8.764,5.158-2.034,11.389-3.052,18.698-3.052h20.31c0-4.695-.539-8.58-1.612-11.659-1.075-3.076-2.849-5.399-5.319-6.964-2.473-1.565-5.911-2.348-10.316-2.348s-8.087.993-11.042,2.973c-2.957,1.983-4.81,4.905-5.561,8.764h-17.892c.645-5.529,2.524-10.197,5.642-14.006,3.115-3.807,7.198-6.781,12.25-8.92,5.05-2.137,10.583-3.208,16.603-3.208,7.737,0,14.238,1.279,19.504,3.834,5.264,2.558,9.213,6.209,11.847,10.955,2.632,4.749,3.949,10.461,3.949,17.137v51.644h-15.475l-1.773-12.989c-1.075,2.088-2.446,4.044-4.111,5.869-1.667,1.827-3.602,3.419-5.803,4.773-2.204,1.357-4.675,2.399-7.415,3.13-2.74.729-5.722,1.096-8.946,1.096ZM543.956,132.975c3.007,0,5.803-.65,8.382-1.956,2.579-1.303,4.78-3.052,6.609-5.243,1.826-2.191,3.305-4.668,4.433-7.434,1.129-2.763,1.745-5.763,1.854-8.998v-.783h-17.892c-4.191,0-7.551.496-10.074,1.486-2.526.993-4.352,2.426-5.481,4.304-1.129,1.878-1.693,3.966-1.693,6.26,0,2.609.537,4.8,1.612,6.573,1.073,1.775,2.685,3.184,4.836,4.225,2.148,1.044,4.619,1.565,7.415,1.565Z" fill="#fff"></path><path d="M651.45,146.903c-4.836,0-9.002-.653-12.493-1.956-3.493-1.303-6.448-2.973-8.866-5.008-2.418-2.034-4.432-4.093-6.044-6.182l-1.773,11.268h-16.119V37.449h18.053v37.778c2.685-4.485,6.367-7.903,11.042-10.251,4.675-2.347,9.966-3.521,15.877-3.521,7.629,0,14.318,1.826,20.068,5.477,5.748,3.653,10.261,8.661,13.54,15.024,3.277,6.365,4.917,13.72,4.917,22.066,0,8.138-1.612,15.469-4.836,21.988-3.224,6.521-7.712,11.635-13.459,15.336-5.75,3.702-12.387,5.556-19.907,5.556ZM647.581,131.723c4.619,0,8.676-1.12,12.17-3.365,3.491-2.243,6.259-5.424,8.301-9.546,2.04-4.121,3.063-8.999,3.063-14.633,0-5.528-1.022-10.38-3.063-14.554-2.043-4.171-4.81-7.38-8.301-9.624-3.493-2.243-7.551-3.365-12.17-3.365-4.73,0-8.841,1.149-12.331,3.443-3.493,2.296-6.234,5.504-8.221,9.625-1.99,4.123-2.982,8.947-2.982,14.476,0,5.634.992,10.486,2.982,14.555,1.987,4.069,4.728,7.253,8.221,9.546,3.491,2.296,7.601,3.443,12.331,3.443Z" fill="#fff"></path><path d="M736.802,146.903c-7.845,0-14.402-1.149-19.665-3.443-5.267-2.294-9.243-5.45-11.928-9.468-2.687-4.015-4.246-8.685-4.675-14.006h18.215c.323,2.296,1.181,4.436,2.579,6.416,1.395,1.983,3.357,3.575,5.884,4.773,2.524,1.201,5.722,1.8,9.591,1.8,3.224,0,5.964-.443,8.221-1.33,2.257-.885,3.949-2.191,5.078-3.912,1.129-1.721,1.693-3.624,1.693-5.712,0-2.817-.726-5.008-2.176-6.572-1.451-1.565-3.521-2.79-6.206-3.678-2.687-.885-6.019-1.643-9.994-2.269-4.73-.626-8.974-1.511-12.734-2.66-3.763-1.147-6.959-2.661-9.591-4.539-2.634-1.878-4.649-4.198-6.044-6.964-1.398-2.763-2.096-6.077-2.096-9.938,0-4.59,1.262-8.685,3.788-12.285,2.524-3.6,6.206-6.441,11.041-8.529,4.836-2.086,10.583-3.13,17.248-3.13,9.672,0,17.273,2.088,22.808,6.26,5.534,4.174,8.838,10.016,9.913,17.527h-17.248c-.645-3.025-2.312-5.423-4.997-7.199-2.687-1.773-6.286-2.661-10.8-2.661s-7.979.837-10.397,2.504c-2.418,1.67-3.626,3.912-3.626,6.729,0,1.984.536,3.732,1.612,5.243,1.073,1.514,2.982,2.817,5.723,3.912,2.74,1.096,6.367,1.956,10.88,2.582,6.662.939,12.331,2.218,17.006,3.834,4.675,1.619,8.221,4.044,10.638,7.277,2.418,3.235,3.571,7.722,3.466,13.459,0,5.426-1.37,10.07-4.11,13.928-2.74,3.861-6.584,6.835-11.525,8.92-4.944,2.086-10.8,3.13-17.57,3.13Z" fill="#fff"></path></svg></div>
+      <div class="header-right">
+        <span class="header-tag">Powered by Axiom</span>
+      </div>
+    </div>
+
+    <div style="padding-top: 0.16in;"></div>
+
+    <div class="product-title">Ask</div>
+    <div class="spotlight">
+      <div>
+        <h2>Meet your employees where they work</h2>
+        <p class="lead">Employees ask in Slack, Teams, or email. Ask checks Axiom for eligibility, pulls the right context, and either resolves the request or hands it off cleanly — without a "submit a ticket" dead end.</p>
+      </div>
+      <div class="spotlight__visual spotlight__visual--inline">
+        <div class="slack-mock__back" aria-hidden="true">
+          <span class="slack-mock__back-logo">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path fill="#E01E5A" d="M5.042 15.165a2.528 2.528 0 0 1-2.52 2.523A2.528 2.528 0 0 1 0 15.165a2.527 2.527 0 0 1 2.522-2.52h2.52v2.52zM6.313 15.165a2.527 2.527 0 0 1 2.521-2.52 2.527 2.527 0 0 1 2.521 2.52v6.313A2.528 2.528 0 0 1 8.834 24a2.528 2.528 0 0 1-2.521-2.522v-6.313z"/>
+              <path fill="#36C5F0" d="M8.834 5.042a2.528 2.528 0 0 1-2.521-2.52A2.528 2.528 0 0 1 8.834 0a2.527 2.527 0 0 1 2.521 2.522v2.52H8.834zM8.834 6.313a2.527 2.527 0 0 1 2.521 2.521 2.527 2.527 0 0 1-2.521 2.521H2.522A2.527 2.527 0 0 1 0 8.834a2.527 2.527 0 0 1 2.522-2.521h6.312z"/>
+              <path fill="#2EB67D" d="M18.956 8.834a2.528 2.528 0 0 1 2.522-2.521A2.528 2.528 0 0 1 24 8.834a2.528 2.528 0 0 1-2.522 2.521h-2.522V8.834zM17.688 8.834a2.528 2.528 0 0 1-2.523 2.521 2.527 2.527 0 0 1-2.52-2.521V2.522A2.527 2.527 0 0 1 15.165 0a2.528 2.528 0 0 1 2.523 2.522v6.312z"/>
+              <path fill="#ECB22E" d="M15.165 18.956a2.528 2.528 0 0 1 2.523 2.522A2.528 2.528 0 0 1 15.165 24a2.527 2.527 0 0 1-2.52-2.522v-2.522h2.52zM15.165 17.688a2.527 2.527 0 0 1-2.52-2.523 2.526 2.526 0 0 1 2.52-2.52h6.313A2.527 2.527 0 0 1 24 15.165a2.528 2.528 0 0 1-2.522 2.523h-6.313z"/>
+            </svg>
+          </span>
+        </div>
+        <div class="slack-mock">
+          <div class="slack-mock__logo" aria-hidden="true">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path fill="#E01E5A" d="M5.042 15.165a2.528 2.528 0 0 1-2.52 2.523A2.528 2.528 0 0 1 0 15.165a2.527 2.527 0 0 1 2.522-2.52h2.52v2.52zM6.313 15.165a2.527 2.527 0 0 1 2.521-2.52 2.527 2.527 0 0 1 2.521 2.52v6.313A2.528 2.528 0 0 1 8.834 24a2.528 2.528 0 0 1-2.521-2.522v-6.313z"/>
+              <path fill="#36C5F0" d="M8.834 5.042a2.528 2.528 0 0 1-2.521-2.52A2.528 2.528 0 0 1 8.834 0a2.527 2.527 0 0 1 2.521 2.522v2.52H8.834zM8.834 6.313a2.527 2.527 0 0 1 2.521 2.521 2.527 2.527 0 0 1-2.521 2.521H2.522A2.527 2.527 0 0 1 0 8.834a2.527 2.527 0 0 1 2.522-2.521h6.312z"/>
+              <path fill="#2EB67D" d="M18.956 8.834a2.528 2.528 0 0 1 2.522-2.521A2.528 2.528 0 0 1 24 8.834a2.528 2.528 0 0 1-2.522 2.521h-2.522V8.834zM17.688 8.834a2.528 2.528 0 0 1-2.523 2.521 2.527 2.527 0 0 1-2.52-2.521V2.522A2.527 2.527 0 0 1 15.165 0a2.528 2.528 0 0 1 2.523 2.522v6.312z"/>
+              <path fill="#ECB22E" d="M15.165 18.956a2.528 2.528 0 0 1 2.523 2.522A2.528 2.528 0 0 1 15.165 24a2.527 2.527 0 0 1-2.52-2.522v-2.522h2.52zM15.165 17.688a2.527 2.527 0 0 1-2.52-2.523 2.526 2.526 0 0 1 2.52-2.52h6.313A2.527 2.527 0 0 1 24 15.165a2.528 2.528 0 0 1-2.522 2.523h-6.313z"/>
+            </svg>
+          </div>
+          <div class="slack-mock__msg">
+            <div class="slack-mock__avatar">JC</div>
+            <div class="slack-mock__body">
+              <div class="slack-mock__head">
+                <span class="slack-mock__name">Jack</span>
+                <span class="slack-mock__time">Just Now</span>
+              </div>
+              <p class="slack-mock__text">Our VPN won't connect since this morning's security update — keeps saying the certificate is invalid.</p>
+            </div>
+          </div>
+          <div class="slack-mock__divider"><span>1 reply</span></div>
+          <div class="slack-mock__msg">
+            <div class="slack-mock__avatar slack-mock__avatar--bot" aria-hidden="true">
+              <svg viewBox="0 0 260 184" xmlns="http://www.w3.org/2000/svg">
+                <path fill="currentColor" d="M244.522,91.839c0-9.882,6.032-18.191,14.22-20.622V21.5c0-11.352-9.202-20.554-20.554-20.554H20.554C9.202.946,0,10.148,0,21.5v49.663c8.353,2.375,14.53,10.809,14.53,20.849s-6.177,18.473-14.53,20.849v49.64c0,11.352,9.202,20.554,20.554,20.554h217.633c11.352,0,20.554-9.202,20.554-20.554v-50.039c-8.188-2.431-14.22-10.741-14.22-20.622ZM222.174,146.482H60.241l-23.674,11.247V37.449h185.607v109.032Z"/>
+                <rect fill="currentColor" x="86.773" y="72.657" width="21.552" height="38.364" rx="9.882" ry="9.882"/>
+                <rect fill="currentColor" x="150.726" y="72.657" width="21.552" height="38.364" rx="9.882" ry="9.882"/>
+              </svg>
+            </div>
+            <div class="slack-mock__body">
+              <div class="slack-mock__head">
+                <span class="slack-mock__name">stlabs</span>
+                <span class="slack-mock__badge">APP</span>
+                <span class="slack-mock__time">Just Now</span>
+              </div>
+              <p class="slack-mock__text">I've pushed a fresh certificate — reconnect to <strong>"VPN-Corp"</strong> and you should be back in.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-title">Inbox</div>
+    <div class="spotlight">
+      <div>
+        <h2>Every incoming issue, pre&#8209;enriched</h2>
+        <p class="lead">Inbox clusters incoming work by root cause and attaches the live slice of Axiom that matters. Operators see what's repeating, what's affected, and the one workflow that fixes it once.</p>
+      </div>
+      <div class="spotlight__visual" data-src="inbox-ticket.png">
+        <img src="inbox-ticket.png" alt="Inbox — VPN authentication failure ticket with intake context, diagnostics, and AI reasoning" onerror="this.classList.add('missing')">
+      </div>
+    </div>
+
+    <div class="product-title">Workflows</div>
+    <div class="spotlight">
+      <div>
+        <h2>Auditable automation, by design</h2>
+        <p class="lead">Workflows turn proposed actions into versioned, policy-gated runs against the live graph. Read them, approve them, replay them. AI proposes; deterministic execution handles the rest.</p>
+      </div>
+      <div class="spotlight__visual" data-src="screenshots/workflows.png">
+        <img src="screenshots/workflows.png" alt="Workflows — versioned, deterministic automation" onerror="this.classList.add('missing')">
+      </div>
+    </div>
+
+    <div class="cta-band">
+      <div class="cta-band__copy">
+        <span class="cta-band__eyebrow">Get started</span>
+        <h2 class="cta-band__headline">Ready to automate your service management with live data?</h2>
+        <p class="cta-band__sub">Reach out for a live demo on your own systems — we'll spin one up against your real stack.</p>
+      </div>
+      <div class="cta-band__actions">
+        <a class="cta-band__primary" href="https://stlabs.com/demo">
+          <span>Book a demo</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M5 12h14"/>
+            <path d="M13 6l6 6-6 6"/>
+          </svg>
+        </a>
+        <a class="cta-band__secondary" href="mailto:hello@stlabs.com">
+          <span>hello@stlabs.com</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="2.5" y="4.5" width="19" height="15" rx="2"/>
+            <path d="M3 7l9 6 9-6"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+
+    <div class="page-footer">
+      <span class="page-footer__copy">© STLabs 2026</span>
+      <a class="page-footer__url" href="https://stlabs.com/">stlabs.com</a>
+    </div>
+  </article>
+
+</body></html>
