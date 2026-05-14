@@ -92,6 +92,22 @@
     justify-content: center;
     overflow: visible;
   }
+  .chip--more {
+    position: absolute;
+    background: rgba(220,90,28,0.14);
+    border: 1px solid rgba(220,90,28,0.45);
+    border-radius: 6px;
+    padding: 4px 10px;
+    color: var(--accent);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    white-space: nowrap;
+  }
   .chip__mark { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; overflow: hidden; }
   .chip__mark img {
     width: 100%;
@@ -238,6 +254,7 @@
       <div class="chip" style="left:395px;top:62px;width:16px;height:16px;" data-name="Jamf"><span class="chip__mark"><img src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/jamf.svg" alt="Jamf" onerror="this.closest('.chip').style.display='none'" onload="if(!this.naturalWidth){this.closest('.chip').style.display='none';}"></span></div>
       <div class="chip" style="left:351px;top:18px;width:26px;height:26px;" data-name="Box"><span class="chip__mark"><img src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/box.svg" alt="Box" onerror="this.closest('.chip').style.display='none'" onload="if(!this.naturalWidth){this.closest('.chip').style.display='none';}"></span></div>
       <div class="chip" style="left:437px;top:22px;width:28px;height:28px;" data-name="SAP"><span class="chip__mark"><img src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/sap.svg" alt="SAP" onerror="this.closest('.chip').style.display='none'" onload="if(!this.naturalWidth){this.closest('.chip').style.display='none';}"></span></div>
+      <div class="chip--more" style="left:444px;top:58px;">+50 more</div>
     </div>
 
     <!-- CONNECTORS -->
