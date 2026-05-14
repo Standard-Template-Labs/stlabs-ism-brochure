@@ -51,7 +51,7 @@
   html, body {
     margin: 0; padding: 0;
     width: 700px;
-    height: 240px;
+    height: 440px;
     overflow: hidden;
     background: var(--bg);
     font-family: 'Inter', system-ui, -apple-system, sans-serif;
@@ -61,7 +61,7 @@
   }
   .stage {
     width: 700px;
-    height: 240px;
+    height: 440px;
     position: absolute;
     top: 0; left: 0;
     overflow: hidden;
@@ -75,10 +75,10 @@
   /* ── CLUSTER (left) ── */
   .sources {
     position: absolute;
-    left: 16px;
-    top: 16px;
-    width: 230px;
-    height: 208px;
+    left: 60px;
+    top: 20px;
+    width: 580px;
+    height: 160px;
     z-index: 3;
   }
   .chip {
@@ -113,8 +113,9 @@
     white-space: nowrap;
   }
   .chip--more-center {
-    left: 256px;
-    top: 113px;
+    left: 50%;
+    top: 188px;
+    transform: translateX(-50%);
     z-index: 3;
   }
   .chip--more .inf {
@@ -150,9 +151,9 @@
   /* ── AXIOM CARD (center) ── */
   .axiom-hub {
     position: absolute;
-    left: 320px;
-    top: 82px;
-    width: 170px;
+    left: 245px;
+    top: 220px;
+    width: 210px;
     z-index: 4;
   }
   .axiom-card {
@@ -201,13 +202,12 @@
   /* ── OUTCOMES (vertical stack on right) ── */
   .outcomes {
     position: absolute;
-    right: 16px;
-    top: 16px;
-    bottom: 16px;
-    width: 160px;
+    left: 60px;
+    right: 60px;
+    bottom: 30px;
     display: flex;
-    flex-direction: column;
-    gap: 8px;
+    flex-direction: row;
+    gap: 12px;
     z-index: 4;
   }
   .outcome {
@@ -220,8 +220,8 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: flex-start;
-    text-align: left;
+    align-items: center;
+    text-align: center;
     gap: 2px;
     overflow: hidden;
     backdrop-filter: blur(6px);
@@ -250,27 +250,27 @@
 
     <!-- LOGOS (cluster, top) -->
     <div class="sources" id="sources">
-      <div class="chip" style="left:9px;top:21px;width:28px;height:28px;" data-name="Microsoft Entra"><span class="chip__mark"><img src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/microsoftazure.svg" alt="Microsoft Entra" onerror="this.closest('.chip').style.display='none'" onload="if(!this.naturalWidth){this.closest('.chip').style.display='none';}"></span></div>
-      <div class="chip" style="left:55px;top:21px;width:28px;height:28px;" data-name="Slack"><span class="chip__mark"><img src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/slack.svg" alt="Slack" onerror="this.closest('.chip').style.display='none'" onload="if(!this.naturalWidth){this.closest('.chip').style.display='none';}"></span></div>
-      <div class="chip" style="left:147px;top:21px;width:28px;height:28px;" data-name="GitHub"><span class="chip__mark"><img src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/github.svg" alt="GitHub" onerror="this.closest('.chip').style.display='none'" onload="if(!this.naturalWidth){this.closest('.chip').style.display='none';}"></span></div>
-      <div class="chip" style="left:193px;top:21px;width:28px;height:28px;" data-name="Google Workspace"><span class="chip__mark"><img src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/google.svg" alt="Google Workspace" onerror="this.closest('.chip').style.display='none'" onload="if(!this.naturalWidth){this.closest('.chip').style.display='none';}"></span></div>
-      <div class="chip" style="left:147px;top:159px;width:28px;height:28px;" data-name="Okta"><span class="chip__mark"><img src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/okta.svg" alt="Okta" onerror="this.closest('.chip').style.display='none'" onload="if(!this.naturalWidth){this.closest('.chip').style.display='none';}"></span></div>
-      <div class="chip" style="left:101px;top:21px;width:28px;height:28px;" data-name="AWS"><span class="chip__mark"><img src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/amazonwebservices.svg" alt="AWS" onerror="this.closest('.chip').style.display='none'" onload="if(!this.naturalWidth){this.closest('.chip').style.display='none';}"></span></div>
-      <div class="chip" style="left:55px;top:90px;width:28px;height:28px;" data-name="Jira"><span class="chip__mark"><img src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/jira.svg" alt="Jira" onerror="this.closest('.chip').style.display='none'" onload="if(!this.naturalWidth){this.closest('.chip').style.display='none';}"></span></div>
+      <div class="chip" style="left:44px;top:13px;width:28px;height:28px;" data-name="Microsoft Entra"><span class="chip__mark"><img src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/microsoftazure.svg" alt="Microsoft Entra" onerror="this.closest('.chip').style.display='none'" onload="if(!this.naturalWidth){this.closest('.chip').style.display='none';}"></span></div>
+      <div class="chip" style="left:160px;top:13px;width:28px;height:28px;" data-name="Slack"><span class="chip__mark"><img src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/slack.svg" alt="Slack" onerror="this.closest('.chip').style.display='none'" onload="if(!this.naturalWidth){this.closest('.chip').style.display='none';}"></span></div>
+      <div class="chip" style="left:392px;top:13px;width:28px;height:28px;" data-name="GitHub"><span class="chip__mark"><img src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/github.svg" alt="GitHub" onerror="this.closest('.chip').style.display='none'" onload="if(!this.naturalWidth){this.closest('.chip').style.display='none';}"></span></div>
+      <div class="chip" style="left:508px;top:13px;width:28px;height:28px;" data-name="Google Workspace"><span class="chip__mark"><img src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/google.svg" alt="Google Workspace" onerror="this.closest('.chip').style.display='none'" onload="if(!this.naturalWidth){this.closest('.chip').style.display='none';}"></span></div>
+      <div class="chip" style="left:392px;top:119px;width:28px;height:28px;" data-name="Okta"><span class="chip__mark"><img src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/okta.svg" alt="Okta" onerror="this.closest('.chip').style.display='none'" onload="if(!this.naturalWidth){this.closest('.chip').style.display='none';}"></span></div>
+      <div class="chip" style="left:276px;top:13px;width:28px;height:28px;" data-name="AWS"><span class="chip__mark"><img src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/amazonwebservices.svg" alt="AWS" onerror="this.closest('.chip').style.display='none'" onload="if(!this.naturalWidth){this.closest('.chip').style.display='none';}"></span></div>
+      <div class="chip" style="left:160px;top:66px;width:28px;height:28px;" data-name="Jira"><span class="chip__mark"><img src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/jira.svg" alt="Jira" onerror="this.closest('.chip').style.display='none'" onload="if(!this.naturalWidth){this.closest('.chip').style.display='none';}"></span></div>
 
-      <div class="chip" style="left:193px;top:90px;width:28px;height:28px;" data-name="Datadog"><span class="chip__mark"><img src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/datadog.svg" alt="Datadog" onerror="this.closest('.chip').style.display='none'" onload="if(!this.naturalWidth){this.closest('.chip').style.display='none';}"></span></div>
+      <div class="chip" style="left:508px;top:66px;width:28px;height:28px;" data-name="Datadog"><span class="chip__mark"><img src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/datadog.svg" alt="Datadog" onerror="this.closest('.chip').style.display='none'" onload="if(!this.naturalWidth){this.closest('.chip').style.display='none';}"></span></div>
       <div class="chip" style="left:60px;top:58px;width:24px;height:24px;" data-name="ServiceNow"><span class="chip__mark"><img src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/servicenow.svg" alt="ServiceNow" onerror="this.closest('.chip').style.display='none'" onload="if(!this.naturalWidth){this.closest('.chip').style.display='none';}"></span></div>
-      <div class="chip" style="left:9px;top:159px;width:28px;height:28px;" data-name="Zendesk"><span class="chip__mark"><img src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/zendesk.svg" alt="Zendesk" onerror="this.closest('.chip').style.display='none'" onload="if(!this.naturalWidth){this.closest('.chip').style.display='none';}"></span></div>
-      <div class="chip" style="left:55px;top:159px;width:28px;height:28px;" data-name="PagerDuty"><span class="chip__mark"><img src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/pagerduty.svg" alt="PagerDuty" onerror="this.closest('.chip').style.display='none'" onload="if(!this.naturalWidth){this.closest('.chip').style.display='none';}"></span></div>
-      <div class="chip" style="left:101px;top:159px;width:28px;height:28px;" data-name="Zoom"><span class="chip__mark"><img src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/zoom.svg" alt="Zoom" onerror="this.closest('.chip').style.display='none'" onload="if(!this.naturalWidth){this.closest('.chip').style.display='none';}"></span></div>
-      <div class="chip" style="left:147px;top:90px;width:28px;height:28px;" data-name="Splunk"><span class="chip__mark"><img src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/splunk.svg" alt="Splunk" onerror="this.closest('.chip').style.display='none'" onload="if(!this.naturalWidth){this.closest('.chip').style.display='none';}"></span></div>
+      <div class="chip" style="left:44px;top:119px;width:28px;height:28px;" data-name="Zendesk"><span class="chip__mark"><img src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/zendesk.svg" alt="Zendesk" onerror="this.closest('.chip').style.display='none'" onload="if(!this.naturalWidth){this.closest('.chip').style.display='none';}"></span></div>
+      <div class="chip" style="left:160px;top:119px;width:28px;height:28px;" data-name="PagerDuty"><span class="chip__mark"><img src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/pagerduty.svg" alt="PagerDuty" onerror="this.closest('.chip').style.display='none'" onload="if(!this.naturalWidth){this.closest('.chip').style.display='none';}"></span></div>
+      <div class="chip" style="left:276px;top:119px;width:28px;height:28px;" data-name="Zoom"><span class="chip__mark"><img src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/zoom.svg" alt="Zoom" onerror="this.closest('.chip').style.display='none'" onload="if(!this.naturalWidth){this.closest('.chip').style.display='none';}"></span></div>
+      <div class="chip" style="left:392px;top:66px;width:28px;height:28px;" data-name="Splunk"><span class="chip__mark"><img src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/splunk.svg" alt="Splunk" onerror="this.closest('.chip').style.display='none'" onload="if(!this.naturalWidth){this.closest('.chip').style.display='none';}"></span></div>
 
       <div class="chip" style="left:325px;top:56px;width:22px;height:22px;" data-name="CrowdStrike"><span class="chip__mark"><img src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/crowdstrike.svg" alt="CrowdStrike" onerror="this.closest('.chip').style.display='none'" onload="if(!this.naturalWidth){this.closest('.chip').style.display='none';}"></span></div>
       <div class="chip" style="left:240px;top:48px;width:36px;height:36px;" data-name="Workday"><span class="chip__mark"><img src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/workday.svg" alt="Workday" onerror="this.closest('.chip').style.display='none'" onload="if(!this.naturalWidth){this.closest('.chip').style.display='none';}"></span></div>
-      <div class="chip" style="left:193px;top:159px;width:28px;height:28px;" data-name="Intune"><span class="chip__mark"><img src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/windows.svg" alt="Intune" onerror="this.closest('.chip').style.display='none'" onload="if(!this.naturalWidth){this.closest('.chip').style.display='none';}"></span></div>
+      <div class="chip" style="left:508px;top:119px;width:28px;height:28px;" data-name="Intune"><span class="chip__mark"><img src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/windows.svg" alt="Intune" onerror="this.closest('.chip').style.display='none'" onload="if(!this.naturalWidth){this.closest('.chip').style.display='none';}"></span></div>
       <div class="chip" style="left:395px;top:62px;width:16px;height:16px;" data-name="Jamf"><span class="chip__mark"><img src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/jamf.svg" alt="Jamf" onerror="this.closest('.chip').style.display='none'" onload="if(!this.naturalWidth){this.closest('.chip').style.display='none';}"></span></div>
-      <div class="chip" style="left:9px;top:90px;width:28px;height:28px;" data-name="Box"><span class="chip__mark"><img src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/box.svg" alt="Box" onerror="this.closest('.chip').style.display='none'" onload="if(!this.naturalWidth){this.closest('.chip').style.display='none';}"></span></div>
-      <div class="chip" style="left:101px;top:90px;width:28px;height:28px;" data-name="SAP"><span class="chip__mark"><img src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/sap.svg" alt="SAP" onerror="this.closest('.chip').style.display='none'" onload="if(!this.naturalWidth){this.closest('.chip').style.display='none';}"></span></div>
+      <div class="chip" style="left:44px;top:66px;width:28px;height:28px;" data-name="Box"><span class="chip__mark"><img src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/box.svg" alt="Box" onerror="this.closest('.chip').style.display='none'" onload="if(!this.naturalWidth){this.closest('.chip').style.display='none';}"></span></div>
+      <div class="chip" style="left:276px;top:66px;width:28px;height:28px;" data-name="SAP"><span class="chip__mark"><img src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/sap.svg" alt="SAP" onerror="this.closest('.chip').style.display='none'" onload="if(!this.naturalWidth){this.closest('.chip').style.display='none';}"></span></div>
     </div>
 
     <!-- +more label, sits between cluster and axiom card -->
@@ -370,22 +370,22 @@
 
       const axiomEl = document.querySelector('.axiom-hub');
       const aRect = axiomEl.getBoundingClientRect();
-      const aLeftMid = toStage(aRect.left, aRect.top + aRect.height / 2);
-      const aRightMid = toStage(aRect.right, aRect.top + aRect.height / 2);
-      const axiomLeft = { x: aLeftMid.x, y: aLeftMid.y };
-      const axiomRight = { x: aRightMid.x, y: aRightMid.y };
+      const aTop = toStage(aRect.left + aRect.width / 2, aRect.top);
+      const aBot = toStage(aRect.left + aRect.width / 2, aRect.bottom);
+      const axiomTop = { x: aTop.x, y: aTop.y };
+      const axiomBot = { x: aBot.x, y: aBot.y };
 
       const chips = Array.from(document.querySelectorAll('.sources .chip'));
 
-      // Each logo → axiom left edge (horizontal flow)
+      // Each logo bottom → axiom top (vertical fan-in)
       chips.forEach((chip) => {
         if (chip.style.display === 'none') return;
         const r = chip.getBoundingClientRect();
-        const c = toStage(r.right, r.top + r.height / 2);
+        const c = toStage(r.left + r.width / 2, r.bottom);
         const sx = c.x, sy = c.y;
-        const ex = axiomLeft.x, ey = axiomLeft.y;
-        const dx = ex - sx;
-        const d = `M ${sx},${sy} C ${sx + dx * 0.45},${sy} ${ex - dx * 0.55},${ey} ${ex},${ey}`;
+        const ex = axiomTop.x, ey = axiomTop.y;
+        const dy = ey - sy;
+        const d = `M ${sx},${sy} C ${sx},${sy + dy * 0.45} ${ex},${ey - dy * 0.55} ${ex},${ey}`;
         const path = document.createElementNS(SVG_NS, 'path');
         path.setAttribute('d', d);
         path.setAttribute('fill', 'none');
@@ -394,14 +394,14 @@
         path.setAttribute('opacity', '0.7');
         svg.appendChild(path);
       });
-      // Axiom right edge → each outcome left edge
+      // Axiom bottom → top of each outcome (vertical fan-out)
       document.querySelectorAll('.outcomes .outcome').forEach((el) => {
         const r = el.getBoundingClientRect();
-        const c = toStage(r.left, r.top + r.height / 2);
-        const sx = axiomRight.x, sy = axiomRight.y;
+        const c = toStage(r.left + r.width / 2, r.top);
+        const sx = axiomBot.x, sy = axiomBot.y;
         const ex = c.x, ey = c.y;
-        const dx = ex - sx;
-        const d = `M ${sx},${sy} C ${sx + dx * 0.45},${sy} ${ex - dx * 0.55},${ey} ${ex},${ey}`;
+        const dy = ey - sy;
+        const d = `M ${sx},${sy} C ${sx},${sy + dy * 0.45} ${ex},${ey - dy * 0.55} ${ex},${ey}`;
         const path = document.createElementNS(SVG_NS, 'path');
         path.setAttribute('d', d);
         path.setAttribute('fill', 'none');
