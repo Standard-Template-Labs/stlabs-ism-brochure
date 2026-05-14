@@ -62,16 +62,7 @@
   }
 
 
-  /* ── Nebula glow behind Axiom card ── */
-  .nebula {
-    position: absolute;
-    left: 100px; top: 60px;
-    width: 500px; height: 310px;
-    z-index: 0;
-    pointer-events: none;
-    background: radial-gradient(ellipse 50% 50% at 50% 50%, rgba(220, 90, 28, 0.20), transparent 70%);
-    filter: blur(32px);
-  }
+  /* nebula removed — glow is now inside the Axiom card */
 
   /* ── CLUSTER (top) ── */
   .sources {
@@ -144,7 +135,7 @@
   .axiom-hub {
     position: absolute;
     left: 245px;
-    top: 150px;
+    top: 175px;
     width: 210px;
     z-index: 4;
   }
@@ -158,6 +149,16 @@
     overflow: hidden;
     text-align: center;
   }
+  .axiom-card::before {
+    content: '';
+    position: absolute;
+    inset: -25%;
+    background: radial-gradient(ellipse 55% 55% at 50% 50%, rgba(220,90,28,0.55), transparent 70%);
+    filter: blur(20px);
+    z-index: 0;
+    pointer-events: none;
+  }
+  .axiom-card > * { position: relative; z-index: 1; }
   .axiom-kicker {
     display: inline-flex;
     align-items: center;
@@ -237,8 +238,6 @@
 <body>
   <div class="stage" id="stage">
 
-    <div class="nebula" aria-hidden="true"></div>
-
     <!-- LOGOS (cluster, top) -->
     <div class="sources" id="sources">
       <div class="chip" style="left:114px;top:14px;width:28px;height:28px;" data-name="Microsoft Entra"><span class="chip__mark"><img src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/microsoftazure.svg" alt="Microsoft Entra" onerror="this.closest('.chip').style.display='none'" onload="if(!this.naturalWidth){this.closest('.chip').style.display='none';}"></span></div>
@@ -270,16 +269,19 @@
     <!-- CONNECTORS -->
     <svg class="connectors" id="connectors" viewBox="0 0 700 700" preserveAspectRatio="none">
       <defs>
-        <linearGradient id="downGrad" x1="0" y1="0" x2="0" y2="1">
+        <linearGradient id="topBeam" x1="0" y1="0" x2="0" y2="1">
           <stop offset="0%"  stop-color="rgba(220,90,28,0.0)"/>
-          <stop offset="60%" stop-color="rgba(220,90,28,0.35)"/>
-          <stop offset="100%" stop-color="rgba(220,90,28,0.8)"/>
+          <stop offset="100%" stop-color="rgba(220,90,28,0.35)"/>
         </linearGradient>
-        <linearGradient id="outGrad" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%"  stop-color="rgba(220,90,28,0.8)"/>
-          <stop offset="100%" stop-color="rgba(244,245,246,0.18)"/>
+        <linearGradient id="botBeam" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%"  stop-color="rgba(220,90,28,0.35)"/>
+          <stop offset="100%" stop-color="rgba(220,90,28,0.0)"/>
         </linearGradient>
       </defs>
+      <!-- Top funnel: cluster → Axiom -->
+      <path d="M 170,108 L 410,108 L 380,170 L 320,170 Z" fill="url(#topBeam)"/>
+      <!-- Bottom funnel: Axiom → outcomes -->
+      <path d="M 320,255 L 380,255 L 632,310 L 68,310 Z" fill="url(#botBeam)"/>
     </svg>
 
     <!-- AXIOM CARD -->
@@ -344,7 +346,9 @@
         if (e.data && e.data.type === 'theme') applyTheme(e.data.theme);
       });
     })();
+    // Bezier curve generation removed — beams are static SVG paths defined inline above.
     window.addEventListener('load', function () {
+      return;
       const svg = document.getElementById('connectors');
       const SVG_NS = 'http://www.w3.org/2000/svg';
       const stage = document.getElementById('stage');
@@ -378,7 +382,7 @@
         const path = document.createElementNS(SVG_NS, 'path');
         path.setAttribute('d', d);
         path.setAttribute('fill', 'none');
-        path.setAttribute('stroke', 'url(#downGrad)');
+        path.setAttribute('stroke', 'url(#topBeam)');
         path.setAttribute('stroke-width', '0.5');
         path.setAttribute('opacity', '0.40');
         svg.appendChild(path);
@@ -394,7 +398,7 @@
         const path = document.createElementNS(SVG_NS, 'path');
         path.setAttribute('d', d);
         path.setAttribute('fill', 'none');
-        path.setAttribute('stroke', 'url(#outGrad)');
+        path.setAttribute('stroke', 'url(#botBeam)');
         path.setAttribute('stroke-width', '0.7');
         path.setAttribute('opacity', '0.5');
         svg.appendChild(path);
