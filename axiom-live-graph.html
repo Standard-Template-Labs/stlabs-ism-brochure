@@ -149,15 +149,6 @@
     overflow: hidden;
     text-align: center;
   }
-  .axiom-card::before {
-    content: '';
-    position: absolute;
-    inset: -25%;
-    background: radial-gradient(ellipse 55% 55% at 50% 50%, rgba(220,90,28,0.55), transparent 70%);
-    filter: blur(20px);
-    z-index: 0;
-    pointer-events: none;
-  }
   .axiom-card > * { position: relative; z-index: 1; }
   .axiom-kicker {
     display: inline-flex;
@@ -271,11 +262,11 @@
       <defs>
         <linearGradient id="topBeam" x1="0" y1="0" x2="0" y2="1">
           <stop offset="0%"  stop-color="rgba(220,90,28,0.0)"/>
-          <stop offset="60%" stop-color="rgba(220,90,28,0.22)"/>
-          <stop offset="100%" stop-color="rgba(220,90,28,0.5)"/>
+          <stop offset="50%" stop-color="rgba(220,90,28,0.5)"/>
+          <stop offset="100%" stop-color="rgba(220,90,28,0.95)"/>
         </linearGradient>
         <linearGradient id="botBeam" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%"  stop-color="rgba(220,90,28,0.5)"/>
+          <stop offset="0%"  stop-color="rgba(220,90,28,0.95)"/>
           <stop offset="100%" stop-color="rgba(220,90,28,0.0)"/>
         </linearGradient>
       </defs>
@@ -378,8 +369,8 @@
         path.setAttribute('d', d);
         path.setAttribute('fill', 'none');
         path.setAttribute('stroke', 'url(#topBeam)');
-        path.setAttribute('stroke-width', '0.5');
-        path.setAttribute('opacity', '0.40');
+        path.setAttribute('stroke-width', '0.9');
+        path.setAttribute('opacity', '0.85');
         svg.appendChild(path);
       });
       // Axiom bottom → top of each outcome
@@ -394,8 +385,8 @@
         path.setAttribute('d', d);
         path.setAttribute('fill', 'none');
         path.setAttribute('stroke', 'url(#botBeam)');
-        path.setAttribute('stroke-width', '0.7');
-        path.setAttribute('opacity', '0.5');
+        path.setAttribute('stroke-width', '1.1');
+        path.setAttribute('opacity', '0.85');
         svg.appendChild(path);
       });
     });
