@@ -329,10 +329,12 @@
         y: (cy - stageTop)  / scale
       });
 
-      const axiomTop    = { x: 350, y: 150 };
-
-
-      const axiomBot    = { x: 350, y: 220 };
+      const axiomEl = document.querySelector('.axiom-hub');
+      const aRect = axiomEl.getBoundingClientRect();
+      const aTop = toStage(aRect.left + aRect.width / 2, aRect.top);
+      const aBot = toStage(aRect.left + aRect.width / 2, aRect.bottom);
+      const axiomTop = { x: aTop.x, y: aTop.y };
+      const axiomBot = { x: aBot.x, y: aBot.y };
 
       const chips = Array.from(document.querySelectorAll('.sources .chip'));
 
