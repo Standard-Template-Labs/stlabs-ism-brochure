@@ -271,17 +271,14 @@
       <defs>
         <linearGradient id="topBeam" x1="0" y1="0" x2="0" y2="1">
           <stop offset="0%"  stop-color="rgba(220,90,28,0.0)"/>
-          <stop offset="100%" stop-color="rgba(220,90,28,0.35)"/>
+          <stop offset="60%" stop-color="rgba(220,90,28,0.22)"/>
+          <stop offset="100%" stop-color="rgba(220,90,28,0.5)"/>
         </linearGradient>
         <linearGradient id="botBeam" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%"  stop-color="rgba(220,90,28,0.35)"/>
+          <stop offset="0%"  stop-color="rgba(220,90,28,0.5)"/>
           <stop offset="100%" stop-color="rgba(220,90,28,0.0)"/>
         </linearGradient>
       </defs>
-      <!-- Top funnel: cluster → Axiom -->
-      <path d="M 170,108 L 410,108 L 380,170 L 320,170 Z" fill="url(#topBeam)"/>
-      <!-- Bottom funnel: Axiom → outcomes -->
-      <path d="M 320,255 L 380,255 L 632,310 L 68,310 Z" fill="url(#botBeam)"/>
     </svg>
 
     <!-- AXIOM CARD -->
@@ -346,9 +343,7 @@
         if (e.data && e.data.type === 'theme') applyTheme(e.data.theme);
       });
     })();
-    // Bezier curve generation removed — beams are static SVG paths defined inline above.
     window.addEventListener('load', function () {
-      return;
       const svg = document.getElementById('connectors');
       const SVG_NS = 'http://www.w3.org/2000/svg';
       const stage = document.getElementById('stage');
