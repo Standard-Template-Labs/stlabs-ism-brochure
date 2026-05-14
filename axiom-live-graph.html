@@ -20,6 +20,24 @@
     --text-3: rgba(254,254,254,0.40);
     --accent: #DC5A1C;
     --accent-soft: rgba(220,90,28,0.18);
+    --logo-filter: brightness(0) invert(1);
+    --axiom-card-bg: linear-gradient(160deg, rgba(220,90,28,0.12), rgba(220,90,28,0.04));
+    --axiom-card-border: rgba(220,90,28,0.18);
+    --axiom-brand: #FEFEFE;
+  }
+  body.light {
+    --bg: #FEFEFE;
+    --surface: rgba(26,26,31,0.035);
+    --border: rgba(26,26,31,0.10);
+    --text: #2C2F36;
+    --text-2: rgba(44,47,54,0.7);
+    --text-3: rgba(44,47,54,0.45);
+    --accent: #DC5A1C;
+    --accent-soft: rgba(220,90,28,0.10);
+    --logo-filter: brightness(0) invert(0);
+    --axiom-card-bg: linear-gradient(160deg, rgba(220,90,28,0.10), rgba(220,90,28,0.03));
+    --axiom-card-border: rgba(220,90,28,0.30);
+    --axiom-brand: #2C2F36;
   }
   * { box-sizing: border-box; }
   html, body {
@@ -83,7 +101,7 @@
     display: block;
     object-fit: contain;
     opacity: 0.92;
-    filter: brightness(0) invert(1);
+    filter: var(--logo-filter);
     transform: none;
     rotate: 0deg;
   }
@@ -202,23 +220,23 @@
       <div class="chip" style="left:60px;top:10px;width:38px;height:38px;" data-name="Slack"><span class="chip__mark"><img src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/slack.svg" alt="Slack" onerror="this.closest('.chip').style.display='none'" onload="if(!this.naturalWidth){this.closest('.chip').style.display='none';}"></span></div>
       <div class="chip" style="left:180px;top:18px;width:24px;height:24px;" data-name="GitHub"><span class="chip__mark"><img src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/github.svg" alt="GitHub" onerror="this.closest('.chip').style.display='none'" onload="if(!this.naturalWidth){this.closest('.chip').style.display='none';}"></span></div>
       <div class="chip" style="left:220px;top:18px;width:24px;height:24px;" data-name="Google Workspace"><span class="chip__mark"><img src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/google.svg" alt="Google Workspace" onerror="this.closest('.chip').style.display='none'" onload="if(!this.naturalWidth){this.closest('.chip').style.display='none';}"></span></div>
-      <div class="chip" style="left:380px;top:60px;width:16px;height:16px;" data-name="Okta"><span class="chip__mark"><img src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/okta.svg" alt="Okta" onerror="this.closest('.chip').style.display='none'" onload="if(!this.naturalWidth){this.closest('.chip').style.display='none';}"></span></div>
+      <div class="chip" style="left:230px;top:60px;width:16px;height:16px;" data-name="Okta"><span class="chip__mark"><img src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/okta.svg" alt="Okta" onerror="this.closest('.chip').style.display='none'" onload="if(!this.naturalWidth){this.closest('.chip').style.display='none';}"></span></div>
       <div class="chip" style="left:120px;top:14px;width:36px;height:36px;" data-name="AWS"><span class="chip__mark"><img src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/amazonwebservices.svg" alt="AWS" onerror="this.closest('.chip').style.display='none'" onload="if(!this.naturalWidth){this.closest('.chip').style.display='none';}"></span></div>
-      <div class="chip" style="left:410px;top:20px;width:28px;height:28px;" data-name="Jira"><span class="chip__mark"><img src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/jira.svg" alt="Jira" onerror="this.closest('.chip').style.display='none'" onload="if(!this.naturalWidth){this.closest('.chip').style.display='none';}"></span></div>
+      <div class="chip" style="left:310px;top:20px;width:28px;height:28px;" data-name="Jira"><span class="chip__mark"><img src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/jira.svg" alt="Jira" onerror="this.closest('.chip').style.display='none'" onload="if(!this.naturalWidth){this.closest('.chip').style.display='none';}"></span></div>
 
       <div class="chip" style="left:20px;top:56px;width:26px;height:26px;" data-name="Datadog"><span class="chip__mark"><img src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/datadog.svg" alt="Datadog" onerror="this.closest('.chip').style.display='none'" onload="if(!this.naturalWidth){this.closest('.chip').style.display='none';}"></span></div>
       <div class="chip" style="left:60px;top:58px;width:24px;height:24px;" data-name="ServiceNow"><span class="chip__mark"><img src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/servicenow.svg" alt="ServiceNow" onerror="this.closest('.chip').style.display='none'" onload="if(!this.naturalWidth){this.closest('.chip').style.display='none';}"></span></div>
       <div class="chip" style="left:100px;top:58px;width:24px;height:24px;" data-name="Zendesk"><span class="chip__mark"><img src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/zendesk.svg" alt="Zendesk" onerror="this.closest('.chip').style.display='none'" onload="if(!this.naturalWidth){this.closest('.chip').style.display='none';}"></span></div>
       <div class="chip" style="left:150px;top:62px;width:14px;height:14px;" data-name="PagerDuty"><span class="chip__mark"><img src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/pagerduty.svg" alt="PagerDuty" onerror="this.closest('.chip').style.display='none'" onload="if(!this.naturalWidth){this.closest('.chip').style.display='none';}"></span></div>
       <div class="chip" style="left:170px;top:48px;width:38px;height:38px;" data-name="Zoom"><span class="chip__mark"><img src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/zoom.svg" alt="Zoom" onerror="this.closest('.chip').style.display='none'" onload="if(!this.naturalWidth){this.closest('.chip').style.display='none';}"></span></div>
-      <div class="chip" style="left:495px;top:8px;width:36px;height:36px;" data-name="Splunk"><span class="chip__mark"><img src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/splunk.svg" alt="Splunk" onerror="this.closest('.chip').style.display='none'" onload="if(!this.naturalWidth){this.closest('.chip').style.display='none';}"></span></div>
+      <div class="chip" style="left:400px;top:8px;width:36px;height:36px;" data-name="Splunk"><span class="chip__mark"><img src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/splunk.svg" alt="Splunk" onerror="this.closest('.chip').style.display='none'" onload="if(!this.naturalWidth){this.closest('.chip').style.display='none';}"></span></div>
 
       <div class="chip" style="left:325px;top:56px;width:22px;height:22px;" data-name="CrowdStrike"><span class="chip__mark"><img src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/crowdstrike.svg" alt="CrowdStrike" onerror="this.closest('.chip').style.display='none'" onload="if(!this.naturalWidth){this.closest('.chip').style.display='none';}"></span></div>
       <div class="chip" style="left:240px;top:48px;width:36px;height:36px;" data-name="Workday"><span class="chip__mark"><img src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/workday.svg" alt="Workday" onerror="this.closest('.chip').style.display='none'" onload="if(!this.naturalWidth){this.closest('.chip').style.display='none';}"></span></div>
-      <div class="chip" style="left:410px;top:60px;width:18px;height:18px;" data-name="Intune"><span class="chip__mark"><img src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/windows.svg" alt="Intune" onerror="this.closest('.chip').style.display='none'" onload="if(!this.naturalWidth){this.closest('.chip').style.display='none';}"></span></div>
+      <div class="chip" style="left:270px;top:60px;width:18px;height:18px;" data-name="Intune"><span class="chip__mark"><img src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/windows.svg" alt="Intune" onerror="this.closest('.chip').style.display='none'" onload="if(!this.naturalWidth){this.closest('.chip').style.display='none';}"></span></div>
       <div class="chip" style="left:395px;top:62px;width:16px;height:16px;" data-name="Jamf"><span class="chip__mark"><img src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/jamf.svg" alt="Jamf" onerror="this.closest('.chip').style.display='none'" onload="if(!this.naturalWidth){this.closest('.chip').style.display='none';}"></span></div>
       <div class="chip" style="left:260px;top:18px;width:26px;height:26px;" data-name="Box"><span class="chip__mark"><img src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/box.svg" alt="Box" onerror="this.closest('.chip').style.display='none'" onload="if(!this.naturalWidth){this.closest('.chip').style.display='none';}"></span></div>
-      <div class="chip" style="left:455px;top:22px;width:28px;height:28px;" data-name="SAP"><span class="chip__mark"><img src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/sap.svg" alt="SAP" onerror="this.closest('.chip').style.display='none'" onload="if(!this.naturalWidth){this.closest('.chip').style.display='none';}"></span></div>
+      <div class="chip" style="left:355px;top:22px;width:28px;height:28px;" data-name="SAP"><span class="chip__mark"><img src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/sap.svg" alt="SAP" onerror="this.closest('.chip').style.display='none'" onload="if(!this.naturalWidth){this.closest('.chip').style.display='none';}"></span></div>
     </div>
 
     <!-- CONNECTORS -->
