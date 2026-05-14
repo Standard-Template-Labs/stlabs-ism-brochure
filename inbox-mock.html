@@ -118,6 +118,13 @@
   .row__body { flex: 1; min-width: 0; font-size: 21px; line-height: 1.4; color: var(--text-2); }
   .row__body b { color: var(--text); font-weight: 600; }
   .row__body em { font-style: normal; color: var(--text-3); }
+  .row__line {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 12px;
+  }
+  .row__text { min-width: 0; }
   .row__time {
     font-family: 'IBM Plex Mono', monospace;
     font-size: 17px;
@@ -247,14 +254,21 @@
     <!-- TIMELINE -->
     <div class="row">
       <span class="row__ico">↑</span>
-      <div class="row__body"><b>Nicholas Khorasani</b> changed priority <span class="pill">P1</span></div>
-      <span class="row__time">2:58 PM</span>
+      <div class="row__body">
+        <div class="row__line">
+          <span class="row__text"><b>Nicholas Khorasani</b> changed priority <span class="pill">P1</span></span>
+          <span class="row__time">2:58 PM</span>
+        </div>
+      </div>
     </div>
 
     <div class="row">
       <span class="row__ico">★</span>
       <div class="row__body">
-        <b>Enrichment Pipeline</b> enriched with context
+        <div class="row__line">
+          <span class="row__text"><b>Enrichment Pipeline</b> enriched with context</span>
+          <span class="row__time">6:16 PM</span>
+        </div>
         <div class="sysblock">
           <span class="sysblock__head">System</span>
           <p class="sysblock__text">
@@ -271,13 +285,16 @@
           </div>
         </div>
       </div>
-      <span class="row__time">6:16 PM</span>
     </div>
 
     <div class="row">
       <span class="row__ico">⊕</span>
-      <div class="row__body"><b>Ask Agent</b> on behalf of <em>Samuel Makarovskiy</em>  ticket created</div>
-      <span class="row__time">6:16 PM</span>
+      <div class="row__body">
+        <div class="row__line">
+          <span class="row__text"><b>Ask Agent</b> on behalf of <em>Samuel Makarovskiy</em>  ticket created</span>
+          <span class="row__time">6:16 PM</span>
+        </div>
+      </div>
     </div>
 
   </div>
