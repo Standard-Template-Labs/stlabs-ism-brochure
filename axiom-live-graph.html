@@ -92,7 +92,7 @@
     letter-spacing: 0.08em;
     display: inline-flex;
     align-items: center;
-    gap: 0;
+    gap: 4px;
     white-space: nowrap;
   }
   .chip--more-center {
@@ -105,7 +105,7 @@
     font-size: 20px;
     line-height: 1;
     font-weight: 500;
-    margin: 0 1px;
+    margin: 0 6px 0 2px;
   }
   .chip__mark { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; overflow: hidden; }
   .chip__mark img {
@@ -254,8 +254,8 @@
       <div class="chip" style="left:438px;top:14px;width:28px;height:28px;" data-name="SAP"><span class="chip__mark"><img src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/sap.svg" alt="SAP" onerror="this.closest('.chip').style.display='none'" onload="if(!this.naturalWidth){this.closest('.chip').style.display='none';}"></span></div>
     </div>
 
-    <!-- +more pill, sits between cluster and axiom card -->
-    <div class="chip--more chip--more-center">+more</div>
+    <!-- +∞ more pill, sits between cluster and axiom card -->
+    <div class="chip--more chip--more-center">+<span class="inf">∞</span> more</div>
 
     <!-- CONNECTORS -->
     <svg class="connectors" id="connectors" viewBox="0 0 700 700" preserveAspectRatio="none">
