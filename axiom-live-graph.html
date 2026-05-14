@@ -128,8 +128,8 @@
     position: relative;
     width: 100%;
     padding: 8px 14px 12px;
-    background: linear-gradient(160deg, rgba(220,90,28,0.12), rgba(220,90,28,0.04));
-    border: 1px solid rgba(220,90,28,0.18);
+    background: var(--axiom-card-bg);
+    border: 1px solid var(--axiom-card-border);
     border-radius: 14px;
     overflow: hidden;
     text-align: center;
@@ -155,7 +155,7 @@
     font-size: 18px;
     letter-spacing: -0.02em;
     line-height: 1;
-    color: #FEFEFE;
+    color: var(--axiom-brand);
   }
   .axiom-sub {
     margin-top: 10px;
@@ -305,6 +305,17 @@
   </div>
 
   <script>
+    (function () {
+      function applyTheme(t) { document.body.classList.toggle('light', t === 'light'); }
+      try {
+        if (window.parent && window.parent.document && window.parent.document.body.classList.contains('light')) {
+          applyTheme('light');
+        }
+      } catch (e) {}
+      window.addEventListener('message', function (e) {
+        if (e.data && e.data.type === 'theme') applyTheme(e.data.theme);
+      });
+    })();
     window.addEventListener('load', function () {
       const svg = document.getElementById('connectors');
       const SVG_NS = 'http://www.w3.org/2000/svg';

@@ -24,6 +24,23 @@
     --condition: #F59E0B;
     --action: #2F6FED;
     --verify: #1C8A5A;
+    --wf-bg: linear-gradient(160deg, rgba(220,90,28,0.10), rgba(220,90,28,0.03));
+    --wf-border: rgba(220,90,28,0.30);
+    --wf-title-border: rgba(220,90,28,0.18);
+  }
+  body.light {
+    --bg: #FEFEFE;
+    --surface: rgba(26,26,31,0.035);
+    --surface-2: rgba(26,26,31,0.05);
+    --border: rgba(26,26,31,0.10);
+    --text: #2C2F36;
+    --text-2: rgba(44,47,54,0.7);
+    --text-3: rgba(44,47,54,0.45);
+    --accent: #DC5A1C;
+    --accent-soft: rgba(220,90,28,0.10);
+    --wf-bg: linear-gradient(160deg, rgba(220,90,28,0.08), rgba(220,90,28,0.02));
+    --wf-border: rgba(220,90,28,0.35);
+    --wf-title-border: rgba(220,90,28,0.22);
   }
   html, body {
     width: 390px;
@@ -93,8 +110,8 @@
 
   /* Generated workflow card */
   .wf {
-    background: linear-gradient(160deg, rgba(220,90,28,0.10), rgba(220,90,28,0.03));
-    border: 1px solid rgba(220,90,28,0.30);
+    background: var(--wf-bg);
+    border: 1px solid var(--wf-border);
     border-radius: 12px;
     padding: 18px 24px 20px;
   }
@@ -110,7 +127,7 @@
     text-transform: uppercase;
     margin-bottom: 12px;
     padding-bottom: 10px;
-    border-bottom: 1px solid rgba(220,90,28,0.18);
+    border-bottom: 1px solid var(--wf-title-border);
   }
   .wf__title::before {
     content: "";
@@ -178,5 +195,18 @@
     </div>
 
   </div>
+  <script>
+    (function () {
+      function applyTheme(t) { document.body.classList.toggle('light', t === 'light'); }
+      try {
+        if (window.parent && window.parent.document && window.parent.document.body.classList.contains('light')) {
+          applyTheme('light');
+        }
+      } catch (e) {}
+      window.addEventListener('message', function (e) {
+        if (e.data && e.data.type === 'theme') applyTheme(e.data.theme);
+      });
+    })();
+  </script>
 </body>
 </html>
