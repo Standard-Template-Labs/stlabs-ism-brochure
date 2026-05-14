@@ -360,40 +360,6 @@
 
       const chips = Array.from(document.querySelectorAll('.sources .chip'));
 
-      // Constellation lines: each logo to its single nearest neighbor, stopping before the logo edge
-      const cls = Array.from(chips).filter(ch => ch.style.display !== 'none');
-      const nodes = cls.map((chip) => {
-        const r = chip.getBoundingClientRect();
-        const ctr = toStage(r.left + r.width / 2, r.top + r.height / 2);
-        return { x: ctr.x, y: ctr.y, r: (r.width / scale) / 2 + 4 };
-      });
-      const drawn = new Set();
-      for (let i = 0; i < nodes.length; i++) {
-        let min = Infinity, mj = -1;
-        for (let j = 0; j < nodes.length; j++) {
-          if (i === j) continue;
-          const d = Math.hypot(nodes[i].x - nodes[j].x, nodes[i].y - nodes[j].y);
-          if (d < min) { min = d; mj = j; }
-        }
-        if (mj < 0) continue;
-        const key = i < mj ? i + '-' + mj : mj + '-' + i;
-        if (drawn.has(key)) continue;
-        drawn.add(key);
-        const dx = nodes[mj].x - nodes[i].x;
-        const dy = nodes[mj].y - nodes[i].y;
-        const len = Math.hypot(dx, dy);
-        if (len <= nodes[i].r + nodes[mj].r) continue;
-        const ux = dx / len, uy = dy / len;
-        const line = document.createElementNS(SVG_NS, 'line');
-        line.setAttribute('x1', nodes[i].x + ux * nodes[i].r);
-        line.setAttribute('y1', nodes[i].y + uy * nodes[i].r);
-        line.setAttribute('x2', nodes[mj].x - ux * nodes[mj].r);
-        line.setAttribute('y2', nodes[mj].y - uy * nodes[mj].r);
-        line.setAttribute('stroke', 'rgba(220,90,28,0.25)');
-        line.setAttribute('stroke-width', '0.5');
-        svg.appendChild(line);
-      }
-
       // Each logo → axiom top
       chips.forEach((chip) => {
         if (chip.style.display === 'none') return;
