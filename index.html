@@ -151,26 +151,27 @@
       padding: 0.18in 0 0.22in; position: relative; z-index: 1;
     }
     .hero h1 {
-      font-family: var(--font-display); font-weight: 600; font-size: 48px;
-      letter-spacing: -0.02em; line-height: 1.06; color: var(--foreground);
-      margin-bottom: 0.2in;
+      font-family: var(--font-display); font-weight: 600; font-size: 40px;
+      letter-spacing: -0.02em; line-height: 1.08; color: var(--foreground);
+      margin-bottom: 0.12in;
     }
     .hero h1 em {
       font-style: normal;
       color: var(--primary);
+      font-size: 44px;
     }
     .hero p {
-      font-size: 14px; line-height: 1.6; color: var(--muted-foreground);
+      font-size: 16px; line-height: 1.55; color: var(--muted-foreground);
       max-width: 7.0in;
       text-wrap: pretty;
     }
 
     /* ── Section labels ── */
     .section-label {
-      font-family: var(--font-accent); font-size: 12px; font-weight: 600;
-      text-transform: uppercase; letter-spacing: 0.14em; color: var(--accent);
+      font-family: var(--font-accent); font-size: 22px; font-weight: 600;
+      text-transform: uppercase; letter-spacing: 0.10em; color: var(--accent);
       margin-top: auto;
-      margin-bottom: 0.14in; position: relative; z-index: 1;
+      margin-bottom: 0.18in; position: relative; z-index: 1;
     }
 
     /* ── Feature spotlight (V3 signature) ── */
@@ -195,13 +196,12 @@
       margin-bottom: 0.08in;
     }
     .spotlight-intro h2 {
-      font-family: var(--font-display); font-weight: 600; font-size: 17px;
-      letter-spacing: -0.015em; line-height: 1.25; color: var(--foreground);
+      font-family: var(--font-sans); font-weight: 400; font-size: 19px;
+      line-height: 1.45; color: var(--muted-foreground);
       margin-bottom: 0.1in;
-      text-wrap: balance;
     }
     .spotlight-intro p.lead {
-      font-size: 14px; line-height: 1.6; color: var(--muted-foreground);
+      font-size: 16px; line-height: 1.55; color: var(--foreground);
       margin: 0;
     }
 
@@ -289,12 +289,12 @@
     .product-title {
       font-family: var(--font-accent);
       font-weight: 600;
-      font-size: 12px;
+      font-size: 24px;
       line-height: 1.2;
       text-transform: uppercase;
-      letter-spacing: 0.14em;
+      letter-spacing: 0.08em;
       color: var(--accent);
-      margin-bottom: 0.18in;
+      margin-bottom: 0.16in;
       position: relative;
       z-index: 1;
     }
@@ -332,23 +332,23 @@
     }
     .page--two .spotlight__visual { aspect-ratio: 17 / 9; }
     .page--two .spotlight h2 {
-      font-size: 17px;
-      line-height: 1.25;
-      margin-bottom: 0.08in;
+      font-size: 22px;
+      line-height: 1.22;
+      margin-bottom: 0.1in;
     }
     .page--two .spotlight p.lead {
-      font-size: 13px;
-      line-height: 1.6;
+      font-size: 15px;
+      line-height: 1.55;
       margin-bottom: 0;
     }
     .spotlight h2 {
-      font-family: var(--font-display); font-weight: 600; font-size: 20px;
+      font-family: var(--font-display); font-weight: 600; font-size: 22px;
       letter-spacing: -0.01em; line-height: 1.22; color: var(--foreground);
       margin-bottom: 0.1in;
       text-wrap: balance;
     }
     .spotlight p.lead {
-      font-size: 13px; line-height: 1.6; color: var(--muted-foreground);
+      font-size: 15px; line-height: 1.55; color: var(--muted-foreground);
       margin-bottom: 0.14in;
     }
     .spotlight .facts {
@@ -400,10 +400,10 @@
     }
     .diff-item { padding-left: 0.16in; border-left: 2px solid var(--accent); }
     .diff-item h4 {
-      font-family: var(--font-display); font-weight: 600; font-size: 17px;
-      color: var(--foreground); margin-bottom: 0.08in; letter-spacing: -0.015em; line-height: 1.25;
+      font-family: var(--font-display); font-weight: 600; font-size: 20px;
+      color: var(--foreground); margin-bottom: 0.08in; letter-spacing: -0.015em; line-height: 1.22;
     }
-    .diff-item p { font-size: 13px; line-height: 1.6; color: var(--muted-foreground); }
+    .diff-item p { font-size: 15px; line-height: 1.55; color: var(--muted-foreground); }
 
     /* ── CTA band (page 2 close) ── */
     .cta-band {
@@ -425,12 +425,12 @@
     .cta-band__eyebrow {
       display: block;
       font-family: var(--font-accent);
-      font-size: 12px;
+      font-size: 26px;
       font-weight: 600;
       text-transform: uppercase;
-      letter-spacing: 0.14em;
+      letter-spacing: 0.08em;
       color: var(--accent);
-      margin-bottom: 0.18in;
+      margin-bottom: 0.14in;
     }
     .cta-band__headline {
       font-family: var(--font-display);
@@ -442,8 +442,8 @@
       margin: 0 0 0.12in;
     }
     .cta-band__sub {
-      font-size: 13px;
-      line-height: 1.6;
+      font-size: 15px;
+      line-height: 1.55;
       color: var(--muted-foreground);
       margin: 0;
     }
@@ -659,14 +659,12 @@
     </div>
 
     <div class="hero">
-      <h1>Automate the ordinary.<br><em>Solve the complex.</em></h1>
-      <p>The Intelligent Service Management Platform, powered by real-time integrations across your business. Every ticket enriched, every automation grounded in truth — not last quarter's snapshot.</p>
+      <h1>Full context ITSM<br><em>Resolution without guesswork</em></h1>
     </div>
 
     <div class="product-title">Real-Time Graph, Not Stale CMDB</div>
     <div class="spotlight-intro">
-      <h2>AI Powered by Real Data in Axiom</h2>
-      <p class="lead">A live model of the people, devices, apps, and infrastructure in your business — continuously synced from the systems you already run. Arm your AI agents with a real-time view of your business.</p>
+      <h2>AI powered by real data in Axiom — a live model of your people, devices, apps, and infrastructure synced from the systems you already run.</h2>
     </div>
 
     <div class="spotlight spotlight--stacked">
@@ -680,15 +678,15 @@
     <div class="diff-grid">
       <div class="diff-item">
         <h4>Real-Time Updates</h4>
-        <p>Every application's event logs are fed into Axiom, so it changes to stay consistent with your environment.</p>
+        <p>Every app's events flow into Axiom. Always in sync with your environment.</p>
       </div>
       <div class="diff-item">
         <h4>Full Context</h4>
-        <p>Axiom unifies all the context needed for automation and tickets in one place to reduce time to resolution.</p>
+        <p>Every ticket lands with full context. No hunting for the info you need.</p>
       </div>
       <div class="diff-item">
-        <h4>Deterministic Execution</h4>
-        <p>All workflows are written in code behind the scenes so they execute the same way every time.</p>
+        <h4>Deterministic Runs</h4>
+        <p>Workflows compile to code. Same inputs, same result, every time.</p>
       </div>
     </div>
 
@@ -707,13 +705,11 @@
       </div>
     </div>
 
-    <div style="padding-top: 0.16in;"></div>
-
     <div class="spotlight">
       <div>
         <div class="product-title">Ask</div>
         <h2>Meet your employees where they work</h2>
-        <p class="lead">Ask checks Axiom, pulls the right context, creates a ticket, and immediately begins working on it before anyone takes a look — even from Slack, Teams, or email.</p>
+        <p class="lead">From Slack, Teams, or email — Ask pulls context, opens a ticket, and starts work immediately.</p>
       </div>
       <div class="spotlight__visual spotlight__visual--inline">
         <div class="slack-mock__back" aria-hidden="true">
@@ -771,7 +767,7 @@
       <div>
         <div class="product-title">Inbox</div>
         <h2>Every issue, fully enriched</h2>
-        <p class="lead">Inbox pulls the relevant context for every ticket so operators can jump in and immediately start addressing the issue rather than searching for the information they need.</p>
+        <p class="lead">Every ticket lands with the context an operator needs. Start resolving, not searching.</p>
       </div>
       <div class="spotlight__visual spotlight__visual--mock">
         <iframe class="mock-frame" src="inbox-mock.html?v=1778792099" scrolling="no" aria-hidden="true"></iframe>
@@ -782,7 +778,7 @@
       <div>
         <div class="product-title">Workflows</div>
         <h2>Auditable automation, by design</h2>
-        <p class="lead">Workflows converts your natural language queries, pulls the relevant information from your context graph, and publishes your automation with deterministic code.</p>
+        <p class="lead">Describe an automation in plain English. Workflows publishes it as deterministic code.</p>
       </div>
       <div class="spotlight__visual spotlight__visual--mock">
         <iframe class="mock-frame" src="workflows-mock.html?v=1778792099" scrolling="no" aria-hidden="true"></iframe>
